@@ -1,0 +1,75 @@
+{
+  "name": {
+    "en": "Fan"
+  },
+  "class": "fan",
+  "capabilities": [
+    "onoff",
+    "dim"
+  ],
+  "capabilitiesOptions": {
+    "dim": {
+      "title": {
+        "en": "Speed"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/fan/assets/images/small.png",
+    "large": "/drivers/fan/assets/images/large.png",
+    "xlarge": "/drivers/fan/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "model",
+          "type": "label",
+          "label": {
+            "en": "Model"
+          },
+          "value": ""
+        },
+        {
+          "id": "room",
+          "type": "label",
+          "label": {
+            "en": "Room"
+          },
+          "value": ""
+        },
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

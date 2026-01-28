@@ -1,0 +1,69 @@
+{
+  "name": {
+    "en": "Smart Kettle"
+  },
+  "class": "kettle",
+  "capabilities": [
+    "onoff",
+    "measure_temperature",
+    "target_temperature"
+  ],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/kettle/assets/images/small.png",
+    "large": "/drivers/kettle/assets/images/large.png",
+    "xlarge": "/drivers/kettle/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "model",
+          "type": "label",
+          "label": {
+            "en": "Model"
+          },
+          "value": ""
+        },
+        {
+          "id": "room",
+          "type": "label",
+          "label": {
+            "en": "Room"
+          },
+          "value": ""
+        },
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

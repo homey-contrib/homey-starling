@@ -1,0 +1,96 @@
+{
+  "name": {
+    "en": "Doorbell"
+  },
+  "class": "doorbell",
+  "capabilities": [
+    "onoff",
+    "alarm_motion",
+    "alarm_person_detected",
+    "alarm_animal_detected",
+    "alarm_vehicle_detected",
+    "alarm_generic"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Doorbell Active"
+      },
+      "insightsTitleTrue": {
+        "en": "Doorbell became active"
+      },
+      "insightsTitleFalse": {
+        "en": "Quiet time enabled"
+      }
+    },
+    "alarm_generic": {
+      "title": {
+        "en": "Button"
+      },
+      "insightsTitleTrue": {
+        "en": "Doorbell pressed"
+      },
+      "insightsTitleFalse": {
+        "en": "Doorbell idle"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/doorbell/assets/images/small.png",
+    "large": "/drivers/doorbell/assets/images/large.png",
+    "xlarge": "/drivers/doorbell/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "model",
+          "type": "label",
+          "label": {
+            "en": "Model"
+          },
+          "value": ""
+        },
+        {
+          "id": "room",
+          "type": "label",
+          "label": {
+            "en": "Room"
+          },
+          "value": ""
+        },
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": {
+    "en": "Humidifier / Dehumidifier"
+  },
+  "class": "humidifier",
+  "capabilities": [
+    "onoff",
+    "measure_humidity",
+    "dim"
+  ],
+  "capabilitiesOptions": {
+    "dim": {
+      "title": {
+        "en": "Intensity"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/humidifier/assets/images/small.png",
+    "large": "/drivers/humidifier/assets/images/large.png",
+    "xlarge": "/drivers/humidifier/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "model",
+          "type": "label",
+          "label": {
+            "en": "Model"
+          },
+          "value": ""
+        },
+        {
+          "id": "room",
+          "type": "label",
+          "label": {
+            "en": "Room"
+          },
+          "value": ""
+        },
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

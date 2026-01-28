@@ -1,0 +1,65 @@
+{
+  "name": {
+    "en": "Home/Away"
+  },
+  "class": "other",
+  "capabilities": [
+    "onoff",
+    "home_away_mode"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Home"
+      },
+      "insightsTitleTrue": {
+        "en": "Set to home"
+      },
+      "insightsTitleFalse": {
+        "en": "Set to away"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/home-away/assets/images/small.png",
+    "large": "/drivers/home-away/assets/images/large.png",
+    "xlarge": "/drivers/home-away/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

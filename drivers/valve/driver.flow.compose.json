@@ -1,0 +1,48 @@
+{
+  "triggers": [
+    {
+      "id": "valve_opened",
+      "title": {
+        "en": "Valve opened"
+      },
+      "hint": {
+        "en": "Triggers when the valve is opened."
+      }
+    },
+    {
+      "id": "valve_closed",
+      "title": {
+        "en": "Valve closed"
+      },
+      "hint": {
+        "en": "Triggers when the valve is closed."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "open_for_duration",
+      "title": {
+        "en": "Open for duration"
+      },
+      "titleFormatted": {
+        "en": "Open valve for [[duration]] minutes"
+      },
+      "hint": {
+        "en": "Open the valve for a specified duration, then automatically close."
+      },
+      "args": [
+        {
+          "name": "duration",
+          "type": "number",
+          "title": {
+            "en": "Duration (minutes)"
+          },
+          "min": 1,
+          "max": 120,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}

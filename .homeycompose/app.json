@@ -1,0 +1,104 @@
+{
+  "id": "com.eyecatch.googlenest.starling",
+  "version": "2.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#46a9dd",
+  "name": {
+    "en": "Starling Home Hub"
+  },
+  "description": {
+    "en": "Adds support for Google Home devices via the Starling Home Hub."
+  },
+  "category": [
+    "tools"
+  ],
+  "tags": {
+    "en": [
+      "google",
+      "starling",
+      "nest"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "source": "https://github.com/homey-contrib/homey-starling",
+  "bugs": {
+    "url": "https://github.com/homey-contrib/homey-starling/issues"
+  },
+  "author": {
+    "name": "Andrew R. Mitchell",
+    "email": "apps@@andrewrmitchell.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "version": "1.0.0",
+        "name": "Ove Andersen",
+        "email": "ove.andersen@outlook.com"
+      },
+      {
+        "version": "2.0.0",
+        "name": "Andrew R. Mitchell",
+        "email": "apps@@andrewrmitchell.com"
+      }
+    ]
+  },
+  "api": {
+    "getHubs": {
+      "method": "GET",
+      "path": "/hubs"
+    },
+    "addHub": {
+      "method": "POST",
+      "path": "/hubs"
+    },
+    "updateHub": {
+      "method": "PUT",
+      "path": "/hubs/:id"
+    },
+    "deleteHub": {
+      "method": "DELETE",
+      "path": "/hubs/:id"
+    },
+    "testHub": {
+      "method": "POST",
+      "path": "/hubs/:id/test"
+    },
+    "testNewHub": {
+      "method": "POST",
+      "path": "/hubs/test"
+    },
+    "getSettings": {
+      "method": "GET",
+      "path": "/settings"
+    },
+    "updateSettings": {
+      "method": "PUT",
+      "path": "/settings"
+    },
+    "getDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics"
+    },
+    "exportDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics/export"
+    },
+    "startDiscoveryScan": {
+      "method": "POST",
+      "path": "/discovery/scan"
+    },
+    "getDiscoveryResults": {
+      "method": "GET",
+      "path": "/discovery/results"
+    }
+  }
+}

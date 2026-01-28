@@ -1,0 +1,27 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Home/Away Mode"
+  },
+  "desc": {
+    "en": "The current presence mode for the structure"
+  },
+  "values": [
+    {
+      "id": "home",
+      "title": {
+        "en": "Home"
+      }
+    },
+    {
+      "id": "away",
+      "title": {
+        "en": "Away"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "icon": "/assets/capabilities/home_away_mode.svg"
+}

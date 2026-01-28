@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "A hub went offline"
+  },
+  "titleFormatted": {
+    "en": "[[hub_name]] went offline"
+  },
+  "hint": {
+    "en": "Triggers when a Starling Hub becomes unreachable."
+  },
+  "tokens": [
+    {
+      "name": "hub_name",
+      "type": "string",
+      "title": {
+        "en": "Hub Name"
+      },
+      "example": {
+        "en": "Living Room Hub"
+      }
+    }
+  ]
+}

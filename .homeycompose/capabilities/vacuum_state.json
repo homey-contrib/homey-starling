@@ -1,0 +1,45 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Vacuum State"
+  },
+  "desc": {
+    "en": "The current operating state of the robot vacuum"
+  },
+  "values": [
+    {
+      "id": "cleaning",
+      "title": {
+        "en": "Cleaning"
+      }
+    },
+    {
+      "id": "docked",
+      "title": {
+        "en": "Docked"
+      }
+    },
+    {
+      "id": "returning",
+      "title": {
+        "en": "Returning to Dock"
+      }
+    },
+    {
+      "id": "paused",
+      "title": {
+        "en": "Paused"
+      }
+    },
+    {
+      "id": "error",
+      "title": {
+        "en": "Error"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/vacuum_state.svg"
+}

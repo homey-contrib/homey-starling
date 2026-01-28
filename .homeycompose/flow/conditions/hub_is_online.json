@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Hub !{{is|isn't}} online"
+  },
+  "titleFormatted": {
+    "en": "[[hub]] !{{is|isn't}} online"
+  },
+  "hint": {
+    "en": "Check if a Starling Hub is currently reachable."
+  },
+  "args": [
+    {
+      "name": "hub",
+      "type": "autocomplete",
+      "title": {
+        "en": "Hub"
+      },
+      "placeholder": {
+        "en": "Select hub..."
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "title": {
+    "en": "Refresh all devices"
+  },
+  "hint": {
+    "en": "Immediately refresh the state of all devices from all hubs."
+  }
+}

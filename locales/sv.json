@@ -1,0 +1,249 @@
+{
+  "app": {
+    "name": "Starling Home Hub",
+    "description": "Lägger till stöd för Google Home-enheter via Starling Home Hub."
+  },
+  "settings": {
+    "title": "Starling Home Hub Inställningar",
+    "hubs": {
+      "title": "Anslutna Hubbar",
+      "add": "Lägg till Hubb",
+      "edit": "Redigera Hubb",
+      "remove": "Ta bort Hubb",
+      "none": "Inga hubbar konfigurerade",
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "connecting": "Ansluter..."
+      }
+    },
+    "hub": {
+      "name": "Hubbnamn",
+      "host": "IP-adress / Värdnamn",
+      "apiKey": "API-nyckel",
+      "protocol": "Protokoll",
+      "permissions": "Behörigheter",
+      "deviceCount": "Enheter",
+      "testConnection": "Testa Anslutning",
+      "save": "Spara",
+      "cancel": "Avbryt"
+    },
+    "permissions": {
+      "read": "Läsa",
+      "write": "Skriva",
+      "camera": "Kamera"
+    },
+    "global": {
+      "title": "Globala Inställningar",
+      "debugMode": "Felsökningsläge",
+      "debugModeDescription": "Aktivera detaljerad loggning för felsökning",
+      "pollInterval": "Pollningsintervall (sekunder)",
+      "pollIntervalDescription": "Hur ofta enhetsstatusändringar ska kontrolleras"
+    },
+    "diagnostics": {
+      "title": "Diagnostik",
+      "lastPoll": "Senaste Pollning",
+      "lastError": "Senaste Fel",
+      "apiVersion": "API-version",
+      "errorHistory": "Felhistorik",
+      "clearErrors": "Rensa Felhistorik",
+      "exportLogs": "Exportera Loggar",
+      "noErrors": "Inga fel registrerade"
+    },
+    "hubRemoval": {
+      "title": "Ta bort Hubb",
+      "message": "Vad vill du göra med enheterna från denna hubb?",
+      "deleteDevices": "Ta bort alla enheter",
+      "keepDevices": "Behåll enheter (markera som otillgängliga)"
+    }
+  },
+  "pairing": {
+    "selectHub": "Välj Hubb",
+    "selectHubDescription": "Välj en hubb att lägga till enheter från",
+    "discovery": {
+      "title": "Upptäck Hubbar",
+      "searching": "Söker efter Starling Hubbar...",
+      "found": "{{count}} hubb(ar) hittade",
+      "notFound": "Inga hubbar hittades",
+      "manual": "Lägg till Manuellt"
+    },
+    "devices": {
+      "title": "Välj Enheter",
+      "selectAll": "Lägg till Alla Enheter",
+      "selectCategory": "Filtrera efter Kategori",
+      "selectIndividual": "Välj Enskilda Enheter",
+      "noDevices": "Inga enheter hittades på denna hubb"
+    },
+    "zone": {
+      "title": "Tilldela Zoner",
+      "suggestion": "Föreslagen zon: {{zone}}",
+      "select": "Välj Zon"
+    },
+    "confirm": {
+      "title": "Bekräfta",
+      "adding": "Lägger till {{count}} enhet(er)..."
+    }
+  },
+  "devices": {
+    "categories": {
+      "cam": "Kamera",
+      "diffuser": "Diffusor",
+      "fan": "Fläkt",
+      "garage": "Garageport",
+      "heater_cooler": "Värme/Kyla",
+      "home_away_control": "Hemma/Borta",
+      "humidifier_dehumidifier": "Luftfuktare/Avfuktare",
+      "kettle": "Vattenkokare",
+      "light": "Lampa",
+      "lock": "Lås",
+      "open_close": "Persienner/Gardiner",
+      "outlet": "Uttag",
+      "purifier": "Luftrenare",
+      "robot": "Robotdammsugare",
+      "sensor": "Sensor",
+      "smoke_co_detector": "Rök-/CO-detektor",
+      "switch": "Strömbrytare",
+      "thermostat": "Termostat",
+      "valve": "Ventil"
+    },
+    "status": {
+      "unavailable": "Enhet otillgänglig",
+      "permissionDenied": "Behörighet ej beviljad"
+    }
+  },
+  "capabilities": {
+    "hvac_state": {
+      "off": "Av",
+      "heating": "Värmer",
+      "cooling": "Kyler"
+    },
+    "home_away_mode": {
+      "home": "Hemma",
+      "away": "Borta"
+    },
+    "vacuum_state": {
+      "cleaning": "Städar",
+      "docked": "Dockad",
+      "returning": "Återvänder till dockan",
+      "paused": "Pausad",
+      "error": "Fel"
+    },
+    "thermostat_preset": {
+      "none": "Ingen",
+      "eco": "Eko",
+      "sleep": "Sömn",
+      "comfort": "Komfort"
+    }
+  },
+  "flow": {
+    "triggers": {
+      "motion_detected": {
+        "title": "Rörelse upptäckt",
+        "hint": "När rörelse upptäcks av en kamera"
+      },
+      "person_detected": {
+        "title": "Person upptäckt",
+        "hint": "När en person upptäcks av en kamera"
+      },
+      "face_detected": {
+        "title": "Ansikte igenkänt",
+        "hint": "När ett känt ansikte upptäcks av en kamera"
+      },
+      "doorbell_pushed": {
+        "title": "Dörrklocka tryckt",
+        "hint": "När någon trycker på dörrklockan"
+      },
+      "package_delivered": {
+        "title": "Paket levererat",
+        "hint": "När en paketleverans upptäcks"
+      },
+      "package_retrieved": {
+        "title": "Paket hämtat",
+        "hint": "När ett paket hämtas"
+      },
+      "lock_jammed": {
+        "title": "Lås fastnat",
+        "hint": "När ett lås rapporterar ett fastnat tillstånd"
+      },
+      "garage_obstructed": {
+        "title": "Garageport blockerad",
+        "hint": "När ett hinder upptäcks i garageporten väg"
+      },
+      "hub_offline": {
+        "title": "Hubb offline",
+        "hint": "När en Starling Hubb blir onåbar"
+      },
+      "hub_online": {
+        "title": "Hubb online",
+        "hint": "När en Starling Hubb blir nåbar igen"
+      },
+      "command_failed": {
+        "title": "Kommando misslyckades",
+        "hint": "När ett enhetskommando misslyckas"
+      },
+      "home_away_changed": {
+        "title": "Hemma/Borta-läge ändrat",
+        "hint": "När hemma/borta-läget ändras"
+      }
+    },
+    "conditions": {
+      "hub_online": {
+        "title": "Hubben !{{är|är inte}} online"
+      },
+      "home_away_mode": {
+        "title": "Hemma/Borta-läget !{{är|är inte}} ..."
+      }
+    },
+    "actions": {
+      "take_snapshot": {
+        "title": "Ta ögonblicksbild"
+      },
+      "set_quiet_time": {
+        "title": "Ställ in tyst läge"
+      },
+      "set_thermostat_preset": {
+        "title": "Ställ in termostatförval"
+      },
+      "refresh_devices": {
+        "title": "Uppdatera alla enheter"
+      },
+      "set_home_away": {
+        "title": "Ställ in Hemma/Borta-läge"
+      }
+    },
+    "tokens": {
+      "face_name": "Ansiktsnamn",
+      "hub_name": "Hubbnamn",
+      "device_name": "Enhetsnamn",
+      "error_message": "Felmeddelande",
+      "command": "Kommando"
+    }
+  },
+  "errors": {
+    "connection_failed": "Kunde inte ansluta till hubben",
+    "invalid_api_key": "API-nyckel avvisad. Kontrollera nyckeln i inställningar.",
+    "device_not_found": "Enhet inte längre tillgänglig på hubben.",
+    "read_only_property": "Denna egenskap kan inte ändras.",
+    "invalid_value": "Värde accepteras inte av enheten.",
+    "set_error": "Google Home avvisade ändringen.",
+    "no_snapshot": "Kamera-ögonblicksbild otillgänglig.",
+    "stream_refused": "Kunde inte starta videoströmmen.",
+    "hub_offline": "Hubben svarar inte.",
+    "rate_limited": "För många förfrågningar. Vänta.",
+    "permission_denied": "Behörighet ej beviljad för denna åtgärd."
+  },
+  "notifications": {
+    "command_failed": {
+      "title": "Kommando Misslyckades",
+      "message": "{{device}}: {{error}}"
+    },
+    "hub_offline": {
+      "title": "Hubb Offline",
+      "message": "{{hub}} svarar inte"
+    },
+    "hub_online": {
+      "title": "Hubb Online",
+      "message": "{{hub}} är online igen"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "app": {
+    "name": "Starling Home Hub",
+    "description": "Voegt ondersteuning toe voor Google Home-apparaten via de Starling Home Hub."
+  },
+  "settings": {
+    "title": "Starling Home Hub Instellingen",
+    "hubs": {
+      "title": "Verbonden Hubs",
+      "add": "Hub Toevoegen",
+      "edit": "Hub Bewerken",
+      "remove": "Hub Verwijderen",
+      "none": "Geen hubs geconfigureerd",
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "connecting": "Verbinden..."
+      }
+    },
+    "hub": {
+      "name": "Hub Naam",
+      "host": "IP-adres / Hostnaam",
+      "apiKey": "API-sleutel",
+      "protocol": "Protocol",
+      "permissions": "Machtigingen",
+      "deviceCount": "Apparaten",
+      "testConnection": "Verbinding Testen",
+      "save": "Opslaan",
+      "cancel": "Annuleren"
+    },
+    "permissions": {
+      "read": "Lezen",
+      "write": "Schrijven",
+      "camera": "Camera"
+    },
+    "global": {
+      "title": "Algemene Instellingen",
+      "debugMode": "Debug Modus",
+      "debugModeDescription": "Schakel uitgebreide logging in voor probleemoplossing",
+      "pollInterval": "Poll Interval (seconden)",
+      "pollIntervalDescription": "Hoe vaak te controleren op apparaatstatuswijzigingen"
+    },
+    "diagnostics": {
+      "title": "Diagnose",
+      "lastPoll": "Laatste Poll",
+      "lastError": "Laatste Fout",
+      "apiVersion": "API Versie",
+      "errorHistory": "Foutgeschiedenis",
+      "clearErrors": "Foutgeschiedenis Wissen",
+      "exportLogs": "Logs Exporteren",
+      "noErrors": "Geen fouten geregistreerd"
+    },
+    "hubRemoval": {
+      "title": "Hub Verwijderen",
+      "message": "Wat wilt u doen met de apparaten van deze hub?",
+      "deleteDevices": "Alle apparaten verwijderen",
+      "keepDevices": "Apparaten behouden (markeren als niet beschikbaar)"
+    }
+  },
+  "pairing": {
+    "selectHub": "Selecteer Hub",
+    "selectHubDescription": "Kies een hub om apparaten van toe te voegen",
+    "discovery": {
+      "title": "Hubs Ontdekken",
+      "searching": "Zoeken naar Starling Hubs...",
+      "found": "{{count}} hub(s) gevonden",
+      "notFound": "Geen hubs gevonden",
+      "manual": "Handmatig Toevoegen"
+    },
+    "devices": {
+      "title": "Selecteer Apparaten",
+      "selectAll": "Alle Apparaten Toevoegen",
+      "selectCategory": "Filteren op Categorie",
+      "selectIndividual": "Individuele Apparaten Selecteren",
+      "noDevices": "Geen apparaten gevonden op deze hub"
+    },
+    "zone": {
+      "title": "Zones Toewijzen",
+      "suggestion": "Voorgestelde zone: {{zone}}",
+      "select": "Selecteer Zone"
+    },
+    "confirm": {
+      "title": "Bevestigen",
+      "adding": "{{count}} apparaat/apparaten toevoegen..."
+    }
+  },
+  "devices": {
+    "categories": {
+      "cam": "Camera",
+      "diffuser": "Diffuser",
+      "fan": "Ventilator",
+      "garage": "Garagedeur",
+      "heater_cooler": "Verwarming/Koeling",
+      "home_away_control": "Thuis/Afwezig",
+      "humidifier_dehumidifier": "Luchtbevochtiger/Ontvochtiger",
+      "kettle": "Waterkoker",
+      "light": "Lamp",
+      "lock": "Slot",
+      "open_close": "Jaloezieën/Gordijnen",
+      "outlet": "Stopcontact",
+      "purifier": "Luchtreiniger",
+      "robot": "Robotstofzuiger",
+      "sensor": "Sensor",
+      "smoke_co_detector": "Rook-/CO-melder",
+      "switch": "Schakelaar",
+      "thermostat": "Thermostaat",
+      "valve": "Klep"
+    },
+    "status": {
+      "unavailable": "Apparaat niet beschikbaar",
+      "permissionDenied": "Geen toestemming verleend"
+    }
+  },
+  "capabilities": {
+    "hvac_state": {
+      "off": "Uit",
+      "heating": "Verwarmen",
+      "cooling": "Koelen"
+    },
+    "home_away_mode": {
+      "home": "Thuis",
+      "away": "Afwezig"
+    },
+    "vacuum_state": {
+      "cleaning": "Aan het schoonmaken",
+      "docked": "In dock",
+      "returning": "Terug naar dock",
+      "paused": "Gepauzeerd",
+      "error": "Fout"
+    },
+    "thermostat_preset": {
+      "none": "Geen",
+      "eco": "Eco",
+      "sleep": "Slaap",
+      "comfort": "Comfort"
+    }
+  },
+  "flow": {
+    "triggers": {
+      "motion_detected": {
+        "title": "Beweging gedetecteerd",
+        "hint": "Wanneer beweging wordt gedetecteerd op een camera"
+      },
+      "person_detected": {
+        "title": "Persoon gedetecteerd",
+        "hint": "Wanneer een persoon wordt gedetecteerd op een camera"
+      },
+      "face_detected": {
+        "title": "Gezicht herkend",
+        "hint": "Wanneer een bekend gezicht wordt gedetecteerd op een camera"
+      },
+      "doorbell_pushed": {
+        "title": "Deurbel ingedrukt",
+        "hint": "Wanneer iemand op de deurbel drukt"
+      },
+      "package_delivered": {
+        "title": "Pakket bezorgd",
+        "hint": "Wanneer een pakketbezorging wordt gedetecteerd"
+      },
+      "package_retrieved": {
+        "title": "Pakket opgehaald",
+        "hint": "Wanneer een pakket wordt opgehaald"
+      },
+      "lock_jammed": {
+        "title": "Slot geblokkeerd",
+        "hint": "Wanneer een slot een geblokkeerde status meldt"
+      },
+      "garage_obstructed": {
+        "title": "Garagedeur geblokkeerd",
+        "hint": "Wanneer een obstakel wordt gedetecteerd in het pad van de garagedeur"
+      },
+      "hub_offline": {
+        "title": "Hub offline gegaan",
+        "hint": "Wanneer een Starling Hub onbereikbaar wordt"
+      },
+      "hub_online": {
+        "title": "Hub online gekomen",
+        "hint": "Wanneer een Starling Hub weer bereikbaar wordt"
+      },
+      "command_failed": {
+        "title": "Opdracht mislukt",
+        "hint": "Wanneer een apparaatopdracht niet kan worden uitgevoerd"
+      },
+      "home_away_changed": {
+        "title": "Thuis/Afwezig modus gewijzigd",
+        "hint": "Wanneer de thuis/afwezig modus verandert"
+      }
+    },
+    "conditions": {
+      "hub_online": {
+        "title": "Hub !{{is|is niet}} online"
+      },
+      "home_away_mode": {
+        "title": "Thuis/Afwezig modus !{{is|is niet}} ..."
+      }
+    },
+    "actions": {
+      "take_snapshot": {
+        "title": "Maak snapshot"
+      },
+      "set_quiet_time": {
+        "title": "Stel stille tijd in"
+      },
+      "set_thermostat_preset": {
+        "title": "Stel thermostaat preset in"
+      },
+      "refresh_devices": {
+        "title": "Vernieuw alle apparaten"
+      },
+      "set_home_away": {
+        "title": "Stel Thuis/Afwezig modus in"
+      }
+    },
+    "tokens": {
+      "face_name": "Gezichtsnaam",
+      "hub_name": "Hub naam",
+      "device_name": "Apparaatnaam",
+      "error_message": "Foutmelding",
+      "command": "Opdracht"
+    }
+  },
+  "errors": {
+    "connection_failed": "Kon geen verbinding maken met hub",
+    "invalid_api_key": "API-sleutel afgewezen. Controleer de sleutel in instellingen.",
+    "device_not_found": "Apparaat niet meer beschikbaar op hub.",
+    "read_only_property": "Deze eigenschap kan niet worden gewijzigd.",
+    "invalid_value": "Waarde niet geaccepteerd door apparaat.",
+    "set_error": "Google Home heeft de wijziging geweigerd.",
+    "no_snapshot": "Camera snapshot niet beschikbaar.",
+    "stream_refused": "Kon videostream niet starten.",
+    "hub_offline": "Hub reageert niet.",
+    "rate_limited": "Te veel verzoeken. Even wachten.",
+    "permission_denied": "Geen toestemming voor deze actie."
+  },
+  "notifications": {
+    "command_failed": {
+      "title": "Opdracht Mislukt",
+      "message": "{{device}}: {{error}}"
+    },
+    "hub_offline": {
+      "title": "Hub Offline",
+      "message": "{{hub}} reageert niet"
+    },
+    "hub_online": {
+      "title": "Hub Online",
+      "message": "{{hub}} is weer online"
+    }
+  }
+}

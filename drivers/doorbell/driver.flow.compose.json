@@ -1,0 +1,107 @@
+{
+  "triggers": [
+    {
+      "id": "doorbell_person_detected",
+      "title": {
+        "en": "Person detected"
+      },
+      "hint": {
+        "en": "Triggers when a person is detected by the doorbell."
+      }
+    },
+    {
+      "id": "doorbell_animal_detected",
+      "title": {
+        "en": "Animal detected"
+      },
+      "hint": {
+        "en": "Triggers when an animal is detected by the doorbell."
+      }
+    },
+    {
+      "id": "doorbell_vehicle_detected",
+      "title": {
+        "en": "Vehicle detected"
+      },
+      "hint": {
+        "en": "Triggers when a vehicle is detected by the doorbell."
+      }
+    },
+    {
+      "id": "doorbell_pressed",
+      "title": {
+        "en": "Doorbell pressed"
+      },
+      "hint": {
+        "en": "Triggers when the doorbell button is pressed."
+      }
+    },
+    {
+      "id": "doorbell_package_delivered",
+      "title": {
+        "en": "Package delivered"
+      },
+      "hint": {
+        "en": "Triggers when a package delivery is detected."
+      }
+    },
+    {
+      "id": "doorbell_package_retrieved",
+      "title": {
+        "en": "Package retrieved"
+      },
+      "hint": {
+        "en": "Triggers when a delivered package is picked up."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "doorbell_is_motion_detected",
+      "title": {
+        "en": "Motion !{{is|isn't}} detected"
+      },
+      "hint": {
+        "en": "Check if motion is currently detected."
+      }
+    },
+    {
+      "id": "doorbell_is_person_detected",
+      "title": {
+        "en": "A person !{{is|isn't}} detected"
+      },
+      "hint": {
+        "en": "Check if a person is currently detected."
+      }
+    },
+    {
+      "id": "doorbell_quiet_time_is_enabled",
+      "title": {
+        "en": "Quiet time !{{is|isn't}} enabled"
+      },
+      "hint": {
+        "en": "Check if quiet time is enabled on the doorbell."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "doorbell_enable_quiet_time",
+      "title": {
+        "en": "Enable quiet time"
+      },
+      "hint": {
+        "en": "Enable quiet time to suppress doorbell notifications."
+      }
+    },
+    {
+      "id": "doorbell_disable_quiet_time",
+      "title": {
+        "en": "Disable quiet time"
+      },
+      "hint": {
+        "en": "Disable quiet time to resume doorbell notifications."
+      }
+    }
+  ]
+}

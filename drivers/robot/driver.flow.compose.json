@@ -1,0 +1,116 @@
+{
+  "triggers": [
+    {
+      "id": "started_cleaning",
+      "title": {
+        "en": "Started cleaning"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum starts cleaning."
+      }
+    },
+    {
+      "id": "stopped_cleaning",
+      "title": {
+        "en": "Stopped cleaning"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum stops cleaning."
+      }
+    },
+    {
+      "id": "docked",
+      "title": {
+        "en": "Vacuum docked"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum returns to its dock."
+      }
+    },
+    {
+      "id": "undocked",
+      "title": {
+        "en": "Vacuum undocked"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum leaves its dock."
+      }
+    },
+    {
+      "id": "robot_battery_low",
+      "title": {
+        "en": "Battery is low"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum battery level is low."
+      }
+    },
+    {
+      "id": "error_occurred",
+      "title": {
+        "en": "An error occurred"
+      },
+      "hint": {
+        "en": "Triggers when the vacuum encounters an error."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "is_cleaning",
+      "title": {
+        "en": "Vacuum !{{is|isn't}} cleaning"
+      },
+      "hint": {
+        "en": "Check if the vacuum is currently cleaning."
+      }
+    },
+    {
+      "id": "is_docked",
+      "title": {
+        "en": "Vacuum !{{is|isn't}} docked"
+      },
+      "hint": {
+        "en": "Check if the vacuum is currently docked."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "start_cleaning",
+      "title": {
+        "en": "Start cleaning"
+      },
+      "hint": {
+        "en": "Start the vacuum cleaning cycle."
+      }
+    },
+    {
+      "id": "stop_cleaning",
+      "title": {
+        "en": "Stop cleaning"
+      },
+      "hint": {
+        "en": "Stop the vacuum cleaning cycle."
+      }
+    },
+    {
+      "id": "pause_cleaning",
+      "title": {
+        "en": "Pause cleaning"
+      },
+      "hint": {
+        "en": "Pause the vacuum cleaning cycle."
+      }
+    },
+    {
+      "id": "return_to_dock",
+      "title": {
+        "en": "Return to dock"
+      },
+      "hint": {
+        "en": "Send the vacuum back to its dock."
+      }
+    }
+  ]
+}

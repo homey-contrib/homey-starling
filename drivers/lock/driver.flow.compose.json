@@ -1,0 +1,48 @@
+{
+  "triggers": [
+    {
+      "id": "lock_jammed",
+      "title": {
+        "en": "Lock is jammed"
+      },
+      "hint": {
+        "en": "Triggers when the lock reports a jammed state."
+      }
+    },
+    {
+      "id": "lock_state_changed",
+      "title": {
+        "en": "Lock state changed"
+      },
+      "titleFormatted": {
+        "en": "Lock changed to [[state]]"
+      },
+      "hint": {
+        "en": "Triggers when the lock state changes."
+      },
+      "tokens": [
+        {
+          "name": "state",
+          "type": "string",
+          "title": {
+            "en": "State"
+          },
+          "example": {
+            "en": "locked"
+          }
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "is_jammed",
+      "title": {
+        "en": "Lock !{{is|isn't}} jammed"
+      },
+      "hint": {
+        "en": "Check if the lock is currently jammed."
+      }
+    }
+  ]
+}

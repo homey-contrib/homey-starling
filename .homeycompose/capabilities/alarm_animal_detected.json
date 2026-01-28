@@ -1,0 +1,16 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Animal Detected"
+  },
+  "getable": true,
+  "setable": false,
+  "insightsTitleTrue": {
+    "en": "Animal detected"
+  },
+  "insightsTitleFalse": {
+    "en": "Animal detection cleared"
+  },
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/animal.svg"
+}

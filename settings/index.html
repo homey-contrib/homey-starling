@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="settings.title">Starling Home Hub Settings</title>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <style>
+      :root {
+        /* Semantic colors */
+        --color-primary: #007aff;
+        --color-success: #4caf50;
+        --color-warning: #ff9800;
+        --color-error: #f44336;
+
+        /* Theme colors - Dark mode defaults */
+        --color-bg-page: #000000;
+        --color-text: #ffffff;
+        --color-text-muted: #888888;
+        --color-text-secondary: rgba(255, 255, 255, 0.7);
+        --color-muted: #888888; /* alias for backwards compat */
+        --color-bg-card: rgba(255, 255, 255, 0.05);
+        --color-bg-card-subtle: rgba(255, 255, 255, 0.03);
+        --color-bg-card-hover: rgba(255, 255, 255, 0.1);
+        --color-bg-modal: #1c1c1e;
+        --color-border: rgba(255, 255, 255, 0.1);
+        --color-border-subtle: rgba(255, 255, 255, 0.05);
+        --color-border-dashed: rgba(255, 255, 255, 0.1);
+        --color-overlay: rgba(0, 0, 0, 0.7);
+        --color-toggle-bg: rgba(255, 255, 255, 0.2);
+        --color-toggle-knob: #ffffff;
+        --color-spinner-track: rgba(255, 255, 255, 0.2);
+
+        /* Spacing */
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+      }
+
+      /* Light mode overrides */
+      @media (prefers-color-scheme: light) {
+        :root {
+          --color-bg-page: #f5f5f7;
+          --color-text: #000000;
+          --color-text-muted: #666666;
+          --color-text-secondary: rgba(0, 0, 0, 0.6);
+          --color-muted: #666666;
+          --color-bg-card: rgba(0, 0, 0, 0.05);
+          --color-bg-card-subtle: rgba(0, 0, 0, 0.02);
+          --color-bg-card-hover: rgba(0, 0, 0, 0.1);
+          --color-bg-modal: #ffffff;
+          --color-border: rgba(0, 0, 0, 0.1);
+          --color-border-subtle: rgba(0, 0, 0, 0.05);
+          --color-border-dashed: rgba(0, 0, 0, 0.15);
+          --color-overlay: rgba(0, 0, 0, 0.5);
+          --color-toggle-bg: rgba(0, 0, 0, 0.2);
+          --color-toggle-knob: #ffffff;
+          --color-spinner-track: rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--color-bg-page);
+        color: var(--color-text);
+      }
+
+      .container {
+        padding: var(--spacing-md);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Tab navigation */
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--color-border);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .tab {
+        padding: var(--spacing-sm) var(--spacing-md);
+        cursor: pointer;
+        opacity: 0.6;
+        border-bottom: 2px solid transparent;
+        transition: opacity 0.2s, border-color 0.2s;
+        color: var(--color-text);
+      }
+
+      .tab:hover {
+        opacity: 0.8;
+      }
+
+      .tab.active {
+        opacity: 1;
+        border-bottom-color: var(--color-primary);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Hub list */
+      .hub-list {
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .hub-item {
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-md);
+        background: var(--color-bg-card);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-sm);
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .hub-item:hover {
+        background: var(--color-bg-card-hover);
+      }
+
+      .hub-status-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: var(--spacing-md);
+        flex-shrink: 0;
+      }
+
+      .hub-status-indicator.online {
+        background: var(--color-success);
+        box-shadow: 0 0 6px var(--color-success);
+      }
+
+      .hub-status-indicator.offline {
+        background: var(--color-error);
+      }
+
+      .hub-status-indicator.connecting {
+        background: var(--color-warning);
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      .hub-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .hub-name {
+        font-weight: 500;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--color-text);
+      }
+
+      .hub-details {
+        font-size: 12px;
+        color: var(--color-muted);
+      }
+
+      .hub-chevron {
+        opacity: 0.4;
+        margin-left: var(--spacing-sm);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: var(--spacing-lg);
+        color: var(--color-muted);
+      }
+
+      /* Modal */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--color-overlay);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay.visible {
+        display: flex;
+      }
+
+      .modal {
+        background: var(--color-bg-modal);
+        border-radius: 12px;
+        width: 90%;
+        max-width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: var(--spacing-lg);
+        color: var(--color-text);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        color: var(--color-text);
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        opacity: 0.6;
+        color: var(--color-text);
+      }
+
+      .modal-close:hover {
+        opacity: 1;
+      }
+
+      /* Permissions display */
+      .permissions {
+        display: flex;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-sm);
+      }
+
+      .permission-badge {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: var(--color-bg-card-hover);
+      }
+
+      .permission-badge.granted {
+        background: rgba(76, 175, 80, 0.2);
+        color: var(--color-success);
+      }
+
+      .permission-badge.denied {
+        background: rgba(244, 67, 54, 0.1);
+        color: var(--color-muted);
+        text-decoration: line-through;
+      }
+
+      /* Form enhancements */
+      .form-row {
+        margin-bottom: var(--spacing-md);
+      }
+
+      .form-hint {
+        font-size: 12px;
+        color: var(--color-muted);
+        margin-top: 4px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-lg);
+      }
+
+      .button-group .homey-button-primary-full,
+      .button-group .homey-button-secondary-shadow,
+      .button-group .homey-button-danger-shadow {
+        flex: 1;
+      }
+
+      /* Test result */
+      .test-result {
+        margin-top: var(--spacing-md);
+        padding: var(--spacing-md);
+        border-radius: 8px;
+        display: none;
+      }
+
+      .test-result.success {
+        display: block;
+        background: rgba(76, 175, 80, 0.1);
+        border: 1px solid var(--color-success);
+        color: var(--color-success);
+      }
+
+      .test-result.error {
+        display: block;
+        background: rgba(244, 67, 54, 0.1);
+        border: 1px solid var(--color-error);
+        color: var(--color-error);
+      }
+
+      /* Diagnostics */
+      .diagnostic-card {
+        background: var(--color-bg-card);
+        border-radius: 8px;
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .diagnostic-card h3 {
+        margin: 0 0 12px 0;
+        color: var(--color-text);
+      }
+
+      .diagnostic-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+
+      .diagnostic-row:last-child {
+        border-bottom: none;
+      }
+
+      .diagnostic-label {
+        color: var(--color-muted);
+      }
+
+      .diagnostic-value {
+        font-family: monospace;
+        color: var(--color-text);
+      }
+
+      .diagnostic-value.online {
+        color: var(--color-success);
+      }
+
+      .diagnostic-value.offline {
+        color: var(--color-error);
+      }
+
+      /* Settings section */
+      .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-md);
+        background: var(--color-bg-card);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-sm);
+        gap: var(--spacing-md);
+      }
+
+      .setting-info {
+        flex: 1;
+        min-width: 0; /* Allow text to shrink and wrap properly */
+      }
+
+      .setting-title {
+        font-weight: 500;
+        color: var(--color-text);
+      }
+
+      .setting-description {
+        font-size: 12px;
+        color: var(--color-muted);
+        margin-top: 2px;
+      }
+
+      /* Toggle switch */
+      .toggle {
+        position: relative;
+        width: 50px;
+        height: 28px;
+      }
+
+      .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-toggle-bg);
+        transition: 0.3s;
+        border-radius: 28px;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--color-toggle-knob);
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+
+      .toggle input:checked + .toggle-slider {
+        background-color: var(--color-primary);
+      }
+
+      .toggle input:checked + .toggle-slider:before {
+        transform: translateX(22px);
+      }
+
+      /* Number input */
+      .number-input {
+        width: 70px !important;
+        max-width: 70px !important;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      /* Stacked setting layout (for inputs that need more space) */
+      .setting-item-stacked {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--spacing-md);
+        background: var(--color-bg-card);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-sm);
+        gap: var(--spacing-sm);
+      }
+
+      .setting-item-stacked .setting-info {
+        width: 100%;
+      }
+
+      .setting-item-stacked .number-input {
+        width: 80px !important;
+        max-width: 80px !important;
+      }
+
+      /* Discovery section */
+      .discovery-section {
+        margin-bottom: var(--spacing-lg);
+        padding: var(--spacing-md);
+        background: var(--color-bg-card-subtle);
+        border-radius: 8px;
+        border: 1px dashed var(--color-border-dashed);
+      }
+
+      .discovery-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .discovery-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-muted);
+      }
+
+      .discovery-list {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .discovery-item {
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: var(--color-bg-card);
+        border-radius: 6px;
+        margin-bottom: var(--spacing-sm);
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .discovery-item:hover {
+        background: var(--color-bg-card-hover);
+      }
+
+      .discovery-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .discovery-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #007aff, #5856d6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: var(--spacing-md);
+        font-size: 16px;
+      }
+
+      .discovery-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .discovery-name {
+        font-weight: 500;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--color-text);
+      }
+
+      .discovery-details {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+      }
+
+      .discovery-empty {
+        text-align: center;
+        padding: var(--spacing-md);
+        color: var(--color-muted);
+        font-size: 13px;
+      }
+
+      .discovery-scanning {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md);
+        color: var(--color-muted);
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--color-spinner-track);
+        border-top-color: var(--color-primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: var(--spacing-md) 0;
+        color: var(--color-muted);
+        font-size: 12px;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--color-border);
+      }
+
+      .divider::before {
+        margin-right: var(--spacing-sm);
+      }
+
+      .divider::after {
+        margin-left: var(--spacing-sm);
+      }
+
+      /* Safari warning banner */
+      .safari-warning {
+        display: none;
+        background: linear-gradient(135deg, #ff9500, #ff6b00);
+        color: white;
+        padding: var(--spacing-md);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .safari-warning.visible {
+        display: block;
+      }
+
+      .safari-warning-title {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .safari-warning-text {
+        font-size: 13px;
+        line-height: 1.4;
+        opacity: 0.95;
+      }
+
+      .safari-warning-options {
+        margin-top: 10px;
+        font-size: 13px;
+      }
+
+      .safari-warning-options ul {
+        margin: 6px 0 0 0;
+        padding-left: 20px;
+      }
+
+      .safari-warning-options li {
+        margin-bottom: 4px;
+      }
+
+      .safari-warning-dismiss {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+
+      .safari-warning-dismiss:hover {
+        background: rgba(255,255,255,0.3);
+      }
+
+      /* Radio button styling */
+      .homey-form-radio-text {
+        color: var(--color-text);
+      }
+
+      /* Confirm modal text */
+      .confirm-modal-text {
+        color: var(--color-text);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      /* Form label colors */
+      .homey-form-label {
+        color: var(--color-text);
+      }
+
+      /* Form input styling for theme */
+      .homey-form-input {
+        color: var(--color-text);
+        background: var(--color-bg-card);
+        border-color: var(--color-border);
+      }
+
+      .homey-form-input::placeholder {
+        color: var(--color-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Safari Warning Banner -->
+      <div id="safari-warning" class="safari-warning">
+        <div class="safari-warning-title">
+          ⚠️ Safari Pairing Limitation
+        </div>
+        <div class="safari-warning-text">
+          Safari's privacy settings block the device pairing flow. You can still configure hubs here, but to add devices you'll need to use an alternative method.
+        </div>
+        <div class="safari-warning-options">
+          <strong>To add devices, use one of these options:</strong>
+          <ul>
+            <li>Homey mobile app (iOS/Android) - Recommended</li>
+            <li>Chrome or Firefox browser</li>
+            <li>Safari with "Prevent cross-site tracking" disabled in Settings → Privacy</li>
+          </ul>
+        </div>
+        <button class="safari-warning-dismiss" onclick="dismissSafariWarning()">Got it</button>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tabs">
+        <div class="tab active" data-tab="hubs" data-i18n="settings.hubs.title">Connected Hubs</div>
+        <div class="tab" data-tab="settings" data-i18n="settings.global.title">Settings</div>
+        <div class="tab" data-tab="diagnostics" data-i18n="settings.diagnostics.title">Diagnostics</div>
+      </div>
+
+      <!-- Hubs Tab -->
+      <div id="tab-hubs" class="tab-content active">
+        <div id="hub-list" class="hub-list">
+          <div class="empty-state" data-i18n="settings.hubs.none">No hubs configured</div>
+        </div>
+        <button id="add-hub-btn" class="homey-button-primary-full" data-i18n="settings.hubs.add">
+          Add Hub
+        </button>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="tab-settings" class="tab-content">
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-title" data-i18n="settings.global.debugMode">Debug Mode</div>
+            <div class="setting-description" data-i18n="settings.global.debugModeDescription">
+              Enable verbose logging for troubleshooting
+            </div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="debug-mode" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item-stacked">
+          <div class="setting-info">
+            <div class="setting-title" data-i18n="settings.global.pollInterval">Poll Interval</div>
+            <div class="setting-description" data-i18n="settings.global.pollIntervalDescription">
+              How often to check for device state changes (seconds)
+            </div>
+          </div>
+          <input type="number" id="poll-interval" class="homey-form-input number-input" min="5" max="60" />
+        </div>
+
+        <button id="save-settings-btn" class="homey-button-primary-full" style="margin-top: 24px;">
+          Save Settings
+        </button>
+      </div>
+
+      <!-- Diagnostics Tab -->
+      <div id="tab-diagnostics" class="tab-content">
+        <div id="diagnostics-content">
+          <div class="empty-state">Loading diagnostics...</div>
+        </div>
+        <div class="button-group" style="margin-top: 16px;">
+          <button id="refresh-diagnostics-btn" class="homey-button-secondary-shadow">
+            Refresh
+          </button>
+          <button id="export-diagnostics-btn" class="homey-button-primary-full">
+            Export Diagnostics
+          </button>
+        </div>
+        <div class="form-hint" style="margin-top: 8px; text-align: center;">
+          Export creates a JSON file for troubleshooting. API keys are not included.
+        </div>
+      </div>
+    </div>
+
+    <!-- Hub Modal (Add/Edit) -->
+    <div id="hub-modal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title" class="modal-title">Add Hub</h2>
+          <button id="modal-close-btn" class="modal-close">&times;</button>
+        </div>
+
+        <form id="hub-form">
+          <input type="hidden" id="hub-id" />
+
+          <!-- Discovery Section (only shown when adding new hub) -->
+          <div id="discovery-section" class="discovery-section">
+            <div class="discovery-header">
+              <span class="discovery-title">Discover Hubs on Network</span>
+              <button type="button" id="scan-btn" class="homey-button-secondary-shadow">
+                Scan
+              </button>
+            </div>
+            <div id="discovery-list" class="discovery-list">
+              <div class="discovery-empty">Click Scan to find Starling Hubs on your network</div>
+            </div>
+          </div>
+
+          <div class="divider" id="manual-divider">or enter manually</div>
+
+          <div class="form-row">
+            <label class="homey-form-label" for="hub-name" data-i18n="settings.hub.name">Hub Name</label>
+            <input class="homey-form-input" type="text" id="hub-name" required placeholder="My Starling Hub" />
+          </div>
+
+          <div class="form-row">
+            <label class="homey-form-label" for="hub-host" data-i18n="settings.hub.host">IP Address / Hostname</label>
+            <input class="homey-form-input" type="text" id="hub-host" required placeholder="192.168.1.100" />
+            <div class="form-hint">Enter the IP address or hostname of your Starling Hub</div>
+          </div>
+
+          <div class="form-row">
+            <label class="homey-form-label" for="hub-apikey" data-i18n="settings.hub.apiKey">API Key</label>
+            <input class="homey-form-input" type="text" id="hub-apikey" required placeholder="XXXXXXXXXXXX" maxlength="12" />
+            <div class="form-hint">12-character API key from Starling app</div>
+          </div>
+
+          <div class="form-row">
+            <label class="homey-form-label" data-i18n="settings.hub.protocol">Protocol</label>
+            <div class="homey-form-radio-set">
+              <label class="homey-form-radio">
+                <input class="homey-form-radio-input" type="radio" name="protocol" value="http" checked />
+                <span class="homey-form-radio-checkmark"></span>
+                <span class="homey-form-radio-text">HTTP (Port 3080)</span>
+              </label>
+              <label class="homey-form-radio">
+                <input class="homey-form-radio-input" type="radio" name="protocol" value="https" />
+                <span class="homey-form-radio-checkmark"></span>
+                <span class="homey-form-radio-text">HTTPS (Port 3443)</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="test-result" class="test-result"></div>
+
+          <div id="permissions-display" style="display: none;">
+            <label class="homey-form-label" data-i18n="settings.hub.permissions">Permissions</label>
+            <div class="permissions" id="permissions-badges"></div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" id="test-btn" class="homey-button-secondary-shadow">
+              Test Connection
+            </button>
+            <button type="submit" id="save-hub-btn" class="homey-button-primary-full">
+              Save
+            </button>
+          </div>
+
+          <div id="delete-section" style="display: none; margin-top: 16px;">
+            <button type="button" id="delete-hub-btn" class="homey-button-danger-shadow" style="width: 100%;">
+              Remove Hub
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div id="confirm-modal" class="modal-overlay">
+      <div class="modal" style="max-width: 400px;">
+        <div class="modal-header">
+          <h2 class="modal-title">Remove Hub</h2>
+          <button id="confirm-close-btn" class="modal-close">&times;</button>
+        </div>
+        <div style="padding: 16px;">
+          <p id="confirm-message" class="confirm-modal-text" style="margin: 0 0 16px 0;">Are you sure you want to remove this hub?</p>
+          <div class="button-group">
+            <button type="button" id="confirm-cancel-btn" class="homey-button-secondary-shadow">Cancel</button>
+            <button type="button" id="confirm-ok-btn" class="homey-button-danger-shadow">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var hubs = [];
+      var settings = {};
+
+      // i18n fallback helper - Homey.__() may not work in Safari iframe
+      var i18nFallbacks = {
+        'settings.hubs.none': 'No hubs configured',
+        'settings.hubs.add': 'Add Hub',
+        'settings.hubs.edit': 'Edit Hub',
+        'settings.hubs.status.online': 'Online',
+        'settings.hubs.status.offline': 'Offline',
+        'settings.hubs.status.connecting': 'Connecting...',
+        'settings.permissions.read': 'Read',
+        'settings.permissions.write': 'Write',
+        'settings.permissions.camera': 'Camera'
+      };
+
+      function __(key) {
+        try {
+          var translated = Homey.__(key);
+          // If Homey returned the key itself, use fallback
+          if (translated === key && i18nFallbacks[key]) {
+            return i18nFallbacks[key];
+          }
+          return translated;
+        } catch (e) {
+          return i18nFallbacks[key] || key;
+        }
+      }
+
+      // Detect Safari and show warning
+      function checkSafari() {
+        try {
+          var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+          var dismissed = false;
+          try {
+            dismissed = localStorage.getItem('safariWarningDismissed') === 'true';
+          } catch (e) {
+            // localStorage blocked by Safari ITP - expected
+          }
+          if (isSafari && !dismissed) {
+            document.getElementById('safari-warning').classList.add('visible');
+          }
+        } catch (e) {
+          // Safari detection failed - silently ignore
+        }
+      }
+
+      function dismissSafariWarning() {
+        document.getElementById('safari-warning').classList.remove('visible');
+        try {
+          localStorage.setItem('safariWarningDismissed', 'true');
+        } catch (e) {
+          // localStorage blocked - warning will show again next time
+        }
+      }
+
+      // Check Safari on page load
+      checkSafari();
+
+      function onHomeyReady(Homey) {
+        Homey.ready();
+
+        // Store Homey reference for use in other functions
+        window.Homey = Homey;
+
+        // Initialize
+        setupTabs();
+        setupEventListeners();
+        loadHubs();
+        loadSettings();
+      }
+
+      // ============================================================
+      // Tab Navigation
+      // ============================================================
+
+      function setupTabs() {
+        document.querySelectorAll('.tab').forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            var tabName = tab.dataset.tab;
+
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(function(t) {
+              t.classList.remove('active');
+            });
+            tab.classList.add('active');
+
+            // Show tab content
+            document.querySelectorAll('.tab-content').forEach(function(c) {
+              c.classList.remove('active');
+            });
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Load data for tab
+            if (tabName === 'diagnostics') {
+              loadDiagnostics();
+            }
+          });
+        });
+      }
+
+      // ============================================================
+      // Event Listeners
+      // ============================================================
+
+      function setupEventListeners() {
+        // Add hub button
+        document.getElementById('add-hub-btn').addEventListener('click', function() {
+          openModal(null);
+        });
+
+        // Hub form submission
+        document.getElementById('hub-form').addEventListener('submit', saveHub);
+
+        // Test connection button
+        document.getElementById('test-btn').addEventListener('click', testConnection);
+
+        // Delete hub button
+        document.getElementById('delete-hub-btn').addEventListener('click', deleteHub);
+
+        // Save settings button
+        document.getElementById('save-settings-btn').addEventListener('click', saveSettings);
+
+        // Refresh diagnostics
+        document.getElementById('refresh-diagnostics-btn').addEventListener('click', loadDiagnostics);
+
+        // Export diagnostics
+        document.getElementById('export-diagnostics-btn').addEventListener('click', exportDiagnostics);
+
+        // Close modal button
+        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+
+        // Confirm modal buttons
+        document.getElementById('confirm-ok-btn').addEventListener('click', handleConfirmOk);
+        document.getElementById('confirm-cancel-btn').addEventListener('click', hideConfirmModal);
+        document.getElementById('confirm-close-btn').addEventListener('click', hideConfirmModal);
+
+        // Close modal on overlay click
+        document.getElementById('hub-modal').addEventListener('click', function(e) {
+          if (e.target.classList.contains('modal-overlay')) {
+            closeModal();
+          }
+        });
+
+        // Discovery scan button
+        document.getElementById('scan-btn').addEventListener('click', startDiscoveryScan);
+      }
+
+      // ============================================================
+      // Hub List
+      // ============================================================
+
+      function loadHubs() {
+        Homey.api('GET', '/hubs', null, function(err, result) {
+          if (err) {
+            console.error('Failed to load hubs:', err);
+            return;
+          }
+          hubs = result.hubs || [];
+          renderHubList();
+        });
+      }
+
+      function renderHubList() {
+        var container = document.getElementById('hub-list');
+
+        // Clear existing content
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        if (hubs.length === 0) {
+          var emptyDiv = document.createElement('div');
+          emptyDiv.className = 'empty-state';
+          emptyDiv.textContent = __('settings.hubs.none');
+          container.appendChild(emptyDiv);
+          return;
+        }
+
+        hubs.forEach(function(hub) {
+          var hubItem = createHubItem(hub);
+          container.appendChild(hubItem);
+        });
+      }
+
+      function createHubItem(hub) {
+        var statusClass = hub.isOnline ? 'online' :
+                         (hub.state === 'connecting' || hub.state === 'reconnecting') ? 'connecting' : 'offline';
+        var statusText = hub.isOnline ? __('settings.hubs.status.online') :
+                        (hub.state === 'connecting' || hub.state === 'reconnecting') ?
+                        __('settings.hubs.status.connecting') : __('settings.hubs.status.offline');
+
+        var item = document.createElement('div');
+        item.className = 'hub-item';
+        item.addEventListener('click', function() {
+          openModal(hub.config.id);
+        });
+
+        var indicator = document.createElement('div');
+        indicator.className = 'hub-status-indicator ' + statusClass;
+        item.appendChild(indicator);
+
+        var info = document.createElement('div');
+        info.className = 'hub-info';
+
+        var name = document.createElement('div');
+        name.className = 'hub-name';
+        name.textContent = hub.config.name;
+        info.appendChild(name);
+
+        var details = document.createElement('div');
+        details.className = 'hub-details';
+        details.textContent = hub.config.host + ' \u00B7 ' + statusText + ' \u00B7 ' + hub.deviceCount + ' devices';
+        info.appendChild(details);
+
+        item.appendChild(info);
+
+        var chevron = document.createElement('div');
+        chevron.className = 'hub-chevron';
+        chevron.textContent = '\u203A';
+        item.appendChild(chevron);
+
+        return item;
+      }
+
+      // ============================================================
+      // Hub Modal
+      // ============================================================
+
+      function openModal(hubId) {
+        var modal = document.getElementById('hub-modal');
+        var form = document.getElementById('hub-form');
+        var title = document.getElementById('modal-title');
+        var deleteSection = document.getElementById('delete-section');
+        var testResult = document.getElementById('test-result');
+        var permissionsDisplay = document.getElementById('permissions-display');
+        var discoverySection = document.getElementById('discovery-section');
+        var manualDivider = document.getElementById('manual-divider');
+
+        // Reset form
+        form.reset();
+        testResult.className = 'test-result';
+        testResult.style.display = 'none';
+        testResult.textContent = '';
+        permissionsDisplay.style.display = 'none';
+
+        // Reset discovery list
+        resetDiscoveryList();
+
+        if (hubId) {
+          // Edit mode - hide discovery section
+          var hub = hubs.find(function(h) {
+            return h.config.id === hubId;
+          });
+          if (!hub) return;
+
+          title.textContent = __('settings.hubs.edit');
+          document.getElementById('hub-id').value = hubId;
+          document.getElementById('hub-name').value = hub.config.name;
+          document.getElementById('hub-host').value = hub.config.host;
+          document.getElementById('hub-apikey').value = hub.config.apiKey;
+
+          var protocol = hub.config.useHttps ? 'https' : 'http';
+          document.querySelector('input[name="protocol"][value="' + protocol + '"]').checked = true;
+
+          deleteSection.style.display = 'block';
+          discoverySection.style.display = 'none';
+          manualDivider.style.display = 'none';
+
+          // Show permissions if available
+          if (hub.permissions) {
+            showPermissions(hub.permissions);
+          }
+        } else {
+          // Add mode - show discovery section
+          title.textContent = __('settings.hubs.add');
+          document.getElementById('hub-id').value = '';
+          deleteSection.style.display = 'none';
+          discoverySection.style.display = 'block';
+          manualDivider.style.display = 'flex';
+        }
+
+        modal.classList.add('visible');
+      }
+
+      function closeModal() {
+        document.getElementById('hub-modal').classList.remove('visible');
+      }
+
+      function testConnection(e) {
+        e.preventDefault();
+
+        var hubId = document.getElementById('hub-id').value;
+        var host = document.getElementById('hub-host').value.trim();
+        var apiKey = document.getElementById('hub-apikey').value.trim();
+        var useHttps = document.querySelector('input[name="protocol"]:checked').value === 'https';
+
+        if (!host || !apiKey) {
+          showTestResult(false, 'Please enter host and API key');
+          return;
+        }
+
+        var testBtn = document.getElementById('test-btn');
+        testBtn.classList.add('is-loading');
+        testBtn.disabled = true;
+
+        var endpoint = hubId ? '/hubs/' + hubId + '/test' : '/hubs/test';
+        var body = hubId ? null : { host: host, apiKey: apiKey, useHttps: useHttps };
+
+        Homey.api('POST', endpoint, body, function(err, result) {
+          testBtn.classList.remove('is-loading');
+          testBtn.disabled = false;
+
+          if (err) {
+            showTestResult(false, err.message || 'Connection failed');
+            return;
+          }
+
+          if (result.success) {
+            showTestResult(true, 'Connected! API Version: ' + result.status.apiVersion);
+            if (result.status.permissions) {
+              showPermissions(result.status.permissions);
+            }
+          } else {
+            showTestResult(false, result.error || 'Connection failed');
+          }
+        });
+      }
+
+      function showTestResult(success, message) {
+        var testResult = document.getElementById('test-result');
+        testResult.textContent = message;
+        testResult.className = 'test-result ' + (success ? 'success' : 'error');
+        testResult.style.display = 'block';
+        // Scroll to show the buttons after result appears
+        setTimeout(function() {
+          var saveBtn = document.getElementById('save-hub-btn');
+          if (saveBtn) {
+            saveBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 100);
+      }
+
+      function showPermissions(permissions) {
+        var container = document.getElementById('permissions-badges');
+
+        // Clear existing badges
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        var badges = [
+          { key: 'read', label: __('settings.permissions.read'), granted: permissions.read },
+          { key: 'write', label: __('settings.permissions.write'), granted: permissions.write },
+          { key: 'camera', label: __('settings.permissions.camera'), granted: permissions.camera }
+        ];
+
+        badges.forEach(function(badge) {
+          var span = document.createElement('span');
+          span.className = 'permission-badge ' + (badge.granted ? 'granted' : 'denied');
+          span.textContent = badge.label;
+          container.appendChild(span);
+        });
+
+        document.getElementById('permissions-display').style.display = 'block';
+      }
+
+      function saveHub(e) {
+        e.preventDefault();
+
+        var hubId = document.getElementById('hub-id').value;
+        var name = document.getElementById('hub-name').value.trim();
+        var host = document.getElementById('hub-host').value.trim();
+        var apiKey = document.getElementById('hub-apikey').value.trim();
+        var useHttps = document.querySelector('input[name="protocol"]:checked').value === 'https';
+
+        if (!name || !host || !apiKey) {
+          Homey.alert('Please fill in all required fields');
+          return;
+        }
+
+        var saveBtn = document.getElementById('save-hub-btn');
+        saveBtn.classList.add('is-loading');
+        saveBtn.disabled = true;
+
+        var method = hubId ? 'PUT' : 'POST';
+        var endpoint = hubId ? '/hubs/' + hubId : '/hubs';
+        var body = { name: name, host: host, apiKey: apiKey, useHttps: useHttps };
+
+        Homey.api(method, endpoint, body, function(err, result) {
+          saveBtn.classList.remove('is-loading');
+          saveBtn.disabled = false;
+
+          if (err) {
+            Homey.alert(err.message || 'Failed to save hub');
+            return;
+          }
+
+          closeModal();
+          loadHubs();
+        });
+      }
+
+      function deleteHub() {
+        var hubId = document.getElementById('hub-id').value;
+        if (!hubId) return;
+
+        showConfirmModal(
+          'Are you sure you want to remove this hub? All devices from this hub will become unavailable.',
+          function() {
+            var deleteBtn = document.getElementById('delete-hub-btn');
+            if (deleteBtn) {
+              deleteBtn.classList.add('is-loading');
+              deleteBtn.disabled = true;
+            }
+
+            Homey.api('DELETE', '/hubs/' + hubId, null, function(err, result) {
+              if (deleteBtn) {
+                deleteBtn.classList.remove('is-loading');
+                deleteBtn.disabled = false;
+              }
+
+              if (err) {
+                Homey.alert('Failed to remove hub: ' + (err.message || 'Unknown error'));
+                return;
+              }
+
+              closeModal();
+              loadHubs();
+            });
+          }
+        );
+      }
+
+      // Custom confirmation modal (works in iframes where native confirm is blocked)
+      var confirmCallback = null;
+
+      function showConfirmModal(message, onConfirm) {
+        document.getElementById('confirm-message').textContent = message;
+        confirmCallback = onConfirm;
+        document.getElementById('confirm-modal').classList.add('visible');
+      }
+
+      function hideConfirmModal() {
+        document.getElementById('confirm-modal').classList.remove('visible');
+        confirmCallback = null;
+      }
+
+      function handleConfirmOk() {
+        var callback = confirmCallback;
+        hideConfirmModal();
+        if (callback) {
+          callback();
+        }
+      }
+
+      // ============================================================
+      // Global Settings
+      // ============================================================
+
+      function loadSettings() {
+        Homey.api('GET', '/settings', null, function(err, result) {
+          if (err) {
+            console.error('Failed to load settings:', err);
+            return;
+          }
+
+          settings = result;
+          document.getElementById('debug-mode').checked = settings.debugMode || false;
+          document.getElementById('poll-interval').value = Math.round((settings.defaultPollIntervalMs || 12000) / 1000);
+        });
+      }
+
+      function saveSettings() {
+        var debugMode = document.getElementById('debug-mode').checked;
+        var pollIntervalSec = parseInt(document.getElementById('poll-interval').value) || 12;
+        var defaultPollIntervalMs = pollIntervalSec * 1000;
+
+        var saveBtn = document.getElementById('save-settings-btn');
+        saveBtn.classList.add('is-loading');
+        saveBtn.disabled = true;
+
+        Homey.api('PUT', '/settings', { debugMode: debugMode, defaultPollIntervalMs: defaultPollIntervalMs }, function(err, result) {
+          saveBtn.classList.remove('is-loading');
+          saveBtn.disabled = false;
+
+          if (err) {
+            Homey.alert(err.message || 'Failed to save settings');
+            return;
+          }
+
+          settings = result;
+          Homey.alert('Settings saved');
+        });
+      }
+
+      // ============================================================
+      // Diagnostics
+      // ============================================================
+
+      function loadDiagnostics() {
+        var container = document.getElementById('diagnostics-content');
+
+        // Clear and show loading
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        var loading = document.createElement('div');
+        loading.className = 'empty-state';
+        loading.textContent = 'Loading...';
+        container.appendChild(loading);
+
+        Homey.api('GET', '/diagnostics', null, function(err, result) {
+          // Clear container
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
+          }
+
+          if (err) {
+            var errorDiv = document.createElement('div');
+            errorDiv.className = 'empty-state';
+            errorDiv.textContent = 'Failed to load diagnostics';
+            container.appendChild(errorDiv);
+            return;
+          }
+
+          if (result.hubs.length === 0) {
+            var emptyDiv = document.createElement('div');
+            emptyDiv.className = 'empty-state';
+            emptyDiv.textContent = 'No hubs configured';
+            container.appendChild(emptyDiv);
+            return;
+          }
+
+          result.hubs.forEach(function(hub) {
+            var card = createDiagnosticCard(hub);
+            container.appendChild(card);
+          });
+        });
+      }
+
+      function createDiagnosticCard(hub) {
+        var card = document.createElement('div');
+        card.className = 'diagnostic-card';
+
+        var title = document.createElement('h3');
+        title.textContent = hub.name;
+        card.appendChild(title);
+
+        var rows = [
+          { label: 'Status', value: hub.state, className: hub.isOnline ? 'online' : 'offline' },
+          { label: 'Last Poll', value: hub.lastPoll ? formatDate(hub.lastPoll) : 'Never' },
+          { label: 'API Version', value: hub.apiVersion || 'Unknown' },
+          { label: 'Devices', value: String(hub.deviceCount) },
+          { label: 'Permissions', value: hub.permissions ?
+              'R:' + (hub.permissions.read ? '\u2713' : '\u2717') +
+              ' W:' + (hub.permissions.write ? '\u2713' : '\u2717') +
+              ' C:' + (hub.permissions.camera ? '\u2713' : '\u2717') :
+              'Unknown' }
+        ];
+
+        if (hub.lastError) {
+          rows.push({ label: 'Last Error', value: hub.lastError, className: 'offline' });
+        }
+
+        rows.forEach(function(row) {
+          var rowEl = document.createElement('div');
+          rowEl.className = 'diagnostic-row';
+
+          var label = document.createElement('span');
+          label.className = 'diagnostic-label';
+          label.textContent = row.label;
+          rowEl.appendChild(label);
+
+          var value = document.createElement('span');
+          value.className = 'diagnostic-value';
+          if (row.className) {
+            value.classList.add(row.className);
+          }
+          value.textContent = row.value;
+          rowEl.appendChild(value);
+
+          card.appendChild(rowEl);
+        });
+
+        return card;
+      }
+
+      /**
+       * Export diagnostics as a downloadable JSON file
+       */
+      function exportDiagnostics() {
+        var exportBtn = document.getElementById('export-diagnostics-btn');
+        exportBtn.classList.add('is-loading');
+        exportBtn.disabled = true;
+        exportBtn.textContent = 'Exporting...';
+
+        Homey.api('GET', '/diagnostics/export', null, function(err, result) {
+          exportBtn.classList.remove('is-loading');
+          exportBtn.disabled = false;
+          exportBtn.textContent = 'Export Diagnostics';
+
+          if (err) {
+            Homey.alert('Failed to export diagnostics: ' + (err.message || 'Unknown error'));
+            return;
+          }
+
+          // Create and download the JSON file
+          try {
+            var jsonString = JSON.stringify(result, null, 2);
+            var blob = new Blob([jsonString], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+
+            // Generate filename with timestamp
+            var date = new Date();
+            var timestamp = date.getFullYear() +
+              ('0' + (date.getMonth() + 1)).slice(-2) +
+              ('0' + date.getDate()).slice(-2) + '-' +
+              ('0' + date.getHours()).slice(-2) +
+              ('0' + date.getMinutes()).slice(-2);
+            var filename = 'starling-diagnostics-' + timestamp + '.json';
+
+            // Create temporary download link and trigger download
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show success message
+            Homey.alert('Diagnostics exported to ' + filename);
+          } catch (downloadErr) {
+            Homey.alert('Failed to create download: ' + downloadErr.message);
+          }
+        });
+      }
+
+      // ============================================================
+      // Discovery Functions
+      // ============================================================
+
+      function resetDiscoveryList() {
+        var container = document.getElementById('discovery-list');
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        var empty = document.createElement('div');
+        empty.className = 'discovery-empty';
+        empty.textContent = 'Click Scan to find Starling Hubs on your network';
+        container.appendChild(empty);
+      }
+
+      function startDiscoveryScan() {
+        var scanBtn = document.getElementById('scan-btn');
+        var container = document.getElementById('discovery-list');
+
+        // Show scanning state
+        scanBtn.disabled = true;
+        scanBtn.textContent = 'Scanning...';
+
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        var scanning = document.createElement('div');
+        scanning.className = 'discovery-scanning';
+
+        var spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        scanning.appendChild(spinner);
+
+        var text = document.createElement('span');
+        text.textContent = 'Scanning network for Starling Hubs...';
+        scanning.appendChild(text);
+
+        container.appendChild(scanning);
+
+        // Start the scan
+        Homey.api('POST', '/discovery/scan', null, function(err, result) {
+          scanBtn.disabled = false;
+          scanBtn.textContent = 'Scan';
+
+          if (err) {
+            renderDiscoveryError('Scan failed: ' + (err.message || 'Unknown error'));
+            return;
+          }
+
+          renderDiscoveryResults(result.hubs || []);
+        });
+      }
+
+      function renderDiscoveryError(message) {
+        var container = document.getElementById('discovery-list');
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        var error = document.createElement('div');
+        error.className = 'discovery-empty';
+        error.style.color = 'var(--color-error)';
+        error.textContent = message;
+        container.appendChild(error);
+      }
+
+      function renderDiscoveryResults(discoveredHubs) {
+        var container = document.getElementById('discovery-list');
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        if (discoveredHubs.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'discovery-empty';
+          empty.textContent = 'No Starling Hubs found. Make sure your hub has Developer Connect enabled.';
+          container.appendChild(empty);
+          return;
+        }
+
+        discoveredHubs.forEach(function(hub) {
+          var item = createDiscoveryItem(hub);
+          container.appendChild(item);
+        });
+      }
+
+      function createDiscoveryItem(hub) {
+        var item = document.createElement('div');
+        item.className = 'discovery-item';
+        item.addEventListener('click', function() {
+          selectDiscoveredHub(hub);
+        });
+
+        var icon = document.createElement('div');
+        icon.className = 'discovery-icon';
+        icon.textContent = '\u2302'; // House symbol
+        item.appendChild(icon);
+
+        var info = document.createElement('div');
+        info.className = 'discovery-info';
+
+        var name = document.createElement('div');
+        name.className = 'discovery-name';
+        name.textContent = hub.name;
+        info.appendChild(name);
+
+        var details = document.createElement('div');
+        details.className = 'discovery-details';
+        var protocol = hub.useHttps ? 'HTTPS' : 'HTTP';
+        details.textContent = hub.host + ':' + hub.port + ' \u00B7 ' + protocol;
+        if (hub.apiVersion) {
+          details.textContent += ' \u00B7 API v' + hub.apiVersion;
+        }
+        info.appendChild(details);
+
+        item.appendChild(info);
+
+        return item;
+      }
+
+      function selectDiscoveredHub(hub) {
+        // Populate form with discovered hub details
+        document.getElementById('hub-name').value = hub.name;
+        document.getElementById('hub-host').value = hub.host;
+
+        // Set protocol
+        var protocol = hub.useHttps ? 'https' : 'http';
+        document.querySelector('input[name="protocol"][value="' + protocol + '"]').checked = true;
+
+        // Focus on API key field since that's what the user needs to enter
+        document.getElementById('hub-apikey').focus();
+
+        // Show a hint
+        var testResult = document.getElementById('test-result');
+        testResult.textContent = 'Hub selected! Enter your API key from the Starling app.';
+        testResult.className = 'test-result success';
+        testResult.style.display = 'block';
+      }
+
+      // ============================================================
+      // Utility Functions
+      // ============================================================
+
+      function formatDate(isoString) {
+        try {
+          var date = new Date(isoString);
+          return date.toLocaleString();
+        } catch (e) {
+          return isoString;
+        }
+      }
+    </script>
+  </body>
+</html>

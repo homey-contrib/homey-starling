@@ -1,0 +1,142 @@
+{
+  "triggers": [
+    {
+      "id": "hvac_state_changed",
+      "title": {
+        "en": "HVAC state changed"
+      },
+      "titleFormatted": {
+        "en": "HVAC changed to [[state]]"
+      },
+      "hint": {
+        "en": "Triggers when the HVAC starts or stops heating/cooling."
+      },
+      "tokens": [
+        {
+          "name": "state",
+          "type": "string",
+          "title": {
+            "en": "State"
+          },
+          "example": {
+            "en": "heating"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hvac_mode_changed",
+      "title": {
+        "en": "HVAC mode changed"
+      },
+      "titleFormatted": {
+        "en": "HVAC mode changed to [[mode]]"
+      },
+      "hint": {
+        "en": "Triggers when the HVAC mode is changed."
+      },
+      "tokens": [
+        {
+          "name": "mode",
+          "type": "string",
+          "title": {
+            "en": "Mode"
+          },
+          "example": {
+            "en": "heat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eco_mode_changed",
+      "title": {
+        "en": "Eco mode changed"
+      },
+      "titleFormatted": {
+        "en": "Eco mode [[state]]"
+      },
+      "hint": {
+        "en": "Triggers when eco mode is enabled or disabled."
+      },
+      "tokens": [
+        {
+          "name": "state",
+          "type": "string",
+          "title": {
+            "en": "State"
+          },
+          "example": {
+            "en": "enabled"
+          }
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "is_heating",
+      "title": {
+        "en": "Thermostat !{{is|isn't}} heating"
+      },
+      "hint": {
+        "en": "Check if the thermostat is currently heating."
+      }
+    },
+    {
+      "id": "is_cooling",
+      "title": {
+        "en": "Thermostat !{{is|isn't}} cooling"
+      },
+      "hint": {
+        "en": "Check if the thermostat is currently cooling."
+      }
+    },
+    {
+      "id": "eco_mode_is_enabled",
+      "title": {
+        "en": "Eco mode !{{is|isn't}} enabled"
+      },
+      "hint": {
+        "en": "Check if eco mode is currently enabled."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "set_eco_mode",
+      "title": {
+        "en": "Set eco mode"
+      },
+      "titleFormatted": {
+        "en": "Set eco mode to [[enabled]]"
+      },
+      "hint": {
+        "en": "Enable or disable eco mode."
+      },
+      "args": [
+        {
+          "name": "enabled",
+          "type": "dropdown",
+          "title": {
+            "en": "Eco Mode"
+          },
+          "values": [
+            {
+              "id": "true",
+              "title": {
+                "en": "Enabled"
+              }
+            },
+            {
+              "id": "false",
+              "title": {
+                "en": "Disabled"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "1.0.0": {
+    "en": "Initial release supporting Nest Protect"
+  },
+  "1.0.1": {
+    "en": "Updated driver icon"
+  },
+  "1.0.2": {
+    "en": "Improved app description"
+  },
+  "1.0.3": {
+    "en": "Fixed API Key input screen. Improved error handling."
+  },
+  "1.1.0": {
+    "en": "Added support for Nest Thermostats and Temperature Sensors. Fixed intermittent issue with Starling hub discovery. Changed permission requirements to only need Read. Thanks Jamison for the contribution!"
+  },
+  "1.1.1": {
+    "en": "Fixed some logging errors"
+  },
+  "2.0.0": {
+      "en": "Upgraded to Starling API v2. This brings in all Google Home devices connected to you Starling Hub. Also added full support for live video and stills from camera class devices."
+  }
+}

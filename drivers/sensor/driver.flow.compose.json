@@ -1,0 +1,177 @@
+{
+  "triggers": [
+    {
+      "id": "water_leak_detected",
+      "title": {
+        "en": "Water leak detected"
+      },
+      "hint": {
+        "en": "Triggers when a water leak is detected."
+      }
+    },
+    {
+      "id": "water_leak_cleared",
+      "title": {
+        "en": "Water leak cleared"
+      },
+      "hint": {
+        "en": "Triggers when the water leak is no longer detected."
+      }
+    },
+    {
+      "id": "temperature_above",
+      "title": {
+        "en": "Temperature rose above..."
+      },
+      "titleFormatted": {
+        "en": "Temperature rose above [[temperature]] C"
+      },
+      "hint": {
+        "en": "Triggers when temperature rises above a threshold."
+      },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "title": {
+            "en": "Temperature"
+          },
+          "min": -40,
+          "max": 60,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": "temperature_below",
+      "title": {
+        "en": "Temperature dropped below..."
+      },
+      "titleFormatted": {
+        "en": "Temperature dropped below [[temperature]] C"
+      },
+      "hint": {
+        "en": "Triggers when temperature drops below a threshold."
+      },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "title": {
+            "en": "Temperature"
+          },
+          "min": -40,
+          "max": 60,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": "humidity_above",
+      "title": {
+        "en": "Humidity rose above..."
+      },
+      "titleFormatted": {
+        "en": "Humidity rose above [[humidity]]%"
+      },
+      "hint": {
+        "en": "Triggers when humidity rises above a threshold."
+      },
+      "args": [
+        {
+          "name": "humidity",
+          "type": "number",
+          "title": {
+            "en": "Humidity"
+          },
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "humidity_below",
+      "title": {
+        "en": "Humidity dropped below..."
+      },
+      "titleFormatted": {
+        "en": "Humidity dropped below [[humidity]]%"
+      },
+      "hint": {
+        "en": "Triggers when humidity drops below a threshold."
+      },
+      "args": [
+        {
+          "name": "humidity",
+          "type": "number",
+          "title": {
+            "en": "Humidity"
+          },
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "water_leak_is_detected",
+      "title": {
+        "en": "Water leak !{{is|isn't}} detected"
+      },
+      "hint": {
+        "en": "Check if a water leak is currently detected."
+      }
+    },
+    {
+      "id": "temperature_is_above",
+      "title": {
+        "en": "Temperature !{{is|isn't}} above..."
+      },
+      "titleFormatted": {
+        "en": "Temperature !{{is|isn't}} above [[temperature]] C"
+      },
+      "hint": {
+        "en": "Check if temperature is above a threshold."
+      },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "title": {
+            "en": "Temperature"
+          },
+          "min": -40,
+          "max": 60,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": "humidity_is_above",
+      "title": {
+        "en": "Humidity !{{is|isn't}} above..."
+      },
+      "titleFormatted": {
+        "en": "Humidity !{{is|isn't}} above [[humidity]]%"
+      },
+      "hint": {
+        "en": "Check if humidity is above a threshold."
+      },
+      "args": [
+        {
+          "name": "humidity",
+          "type": "number",
+          "title": {
+            "en": "Humidity"
+          },
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}

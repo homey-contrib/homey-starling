@@ -1,0 +1,16 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Person Detected"
+  },
+  "getable": true,
+  "setable": false,
+  "insightsTitleTrue": {
+    "en": "Person detected"
+  },
+  "insightsTitleFalse": {
+    "en": "Person detection cleared"
+  },
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/person.svg"
+}

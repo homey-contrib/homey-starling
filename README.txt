@@ -1,0 +1,2 @@
+Adds support for Google Home Connected devices via the Starling Home Hub.
+Currently supports all devices supported by Starling Home Hub. This includes video class devices like doorbells and cameras. For these devices, live streaming is also supported.

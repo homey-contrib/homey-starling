@@ -1,0 +1,249 @@
+{
+  "app": {
+    "name": "Starling Home Hub",
+    "description": "Legger til støtte for Google Home-enheter via Starling Home Hub."
+  },
+  "settings": {
+    "title": "Starling Home Hub Innstillinger",
+    "hubs": {
+      "title": "Tilkoblede Huber",
+      "add": "Legg til Hub",
+      "edit": "Rediger Hub",
+      "remove": "Fjern Hub",
+      "none": "Ingen huber konfigurert",
+      "status": {
+        "online": "Tilkoblet",
+        "offline": "Frakoblet",
+        "connecting": "Kobler til..."
+      }
+    },
+    "hub": {
+      "name": "Hubnavn",
+      "host": "IP-adresse / Vertsnavn",
+      "apiKey": "API-nøkkel",
+      "protocol": "Protokoll",
+      "permissions": "Tillatelser",
+      "deviceCount": "Enheter",
+      "testConnection": "Test Tilkobling",
+      "save": "Lagre",
+      "cancel": "Avbryt"
+    },
+    "permissions": {
+      "read": "Lese",
+      "write": "Skrive",
+      "camera": "Kamera"
+    },
+    "global": {
+      "title": "Globale Innstillinger",
+      "debugMode": "Feilsøkingsmodus",
+      "debugModeDescription": "Aktiver detaljert logging for feilsøking",
+      "pollInterval": "Pollingsintervall (sekunder)",
+      "pollIntervalDescription": "Hvor ofte sjekke for endringer i enhetsstatus"
+    },
+    "diagnostics": {
+      "title": "Diagnostikk",
+      "lastPoll": "Siste Polling",
+      "lastError": "Siste Feil",
+      "apiVersion": "API-versjon",
+      "errorHistory": "Feilhistorikk",
+      "clearErrors": "Tøm Feilhistorikk",
+      "exportLogs": "Eksporter Logger",
+      "noErrors": "Ingen feil registrert"
+    },
+    "hubRemoval": {
+      "title": "Fjern Hub",
+      "message": "Hva vil du gjøre med enhetene fra denne huben?",
+      "deleteDevices": "Slett alle enheter",
+      "keepDevices": "Behold enheter (merk som utilgjengelige)"
+    }
+  },
+  "pairing": {
+    "selectHub": "Velg Hub",
+    "selectHubDescription": "Velg en hub å legge til enheter fra",
+    "discovery": {
+      "title": "Oppdag Huber",
+      "searching": "Søker etter Starling Huber...",
+      "found": "{{count}} hub(er) funnet",
+      "notFound": "Ingen huber funnet",
+      "manual": "Legg til Manuelt"
+    },
+    "devices": {
+      "title": "Velg Enheter",
+      "selectAll": "Legg til Alle Enheter",
+      "selectCategory": "Filtrer etter Kategori",
+      "selectIndividual": "Velg Enkeltenheter",
+      "noDevices": "Ingen enheter funnet på denne huben"
+    },
+    "zone": {
+      "title": "Tilordne Soner",
+      "suggestion": "Foreslått sone: {{zone}}",
+      "select": "Velg Sone"
+    },
+    "confirm": {
+      "title": "Bekreft",
+      "adding": "Legger til {{count}} enhet(er)..."
+    }
+  },
+  "devices": {
+    "categories": {
+      "cam": "Kamera",
+      "diffuser": "Diffusor",
+      "fan": "Vifte",
+      "garage": "Garasjeport",
+      "heater_cooler": "Varme/Kjøling",
+      "home_away_control": "Hjemme/Borte",
+      "humidifier_dehumidifier": "Luftfukter/Avfukter",
+      "kettle": "Vannkoker",
+      "light": "Lys",
+      "lock": "Lås",
+      "open_close": "Persienner/Gardiner",
+      "outlet": "Stikkontakt",
+      "purifier": "Luftrenser",
+      "robot": "Robotstøvsuger",
+      "sensor": "Sensor",
+      "smoke_co_detector": "Røyk-/CO-detektor",
+      "switch": "Bryter",
+      "thermostat": "Termostat",
+      "valve": "Ventil"
+    },
+    "status": {
+      "unavailable": "Enhet utilgjengelig",
+      "permissionDenied": "Tillatelse ikke gitt"
+    }
+  },
+  "capabilities": {
+    "hvac_state": {
+      "off": "Av",
+      "heating": "Varmer",
+      "cooling": "Kjøler"
+    },
+    "home_away_mode": {
+      "home": "Hjemme",
+      "away": "Borte"
+    },
+    "vacuum_state": {
+      "cleaning": "Rengjør",
+      "docked": "Dokket",
+      "returning": "Returnerer til dokk",
+      "paused": "Pauset",
+      "error": "Feil"
+    },
+    "thermostat_preset": {
+      "none": "Ingen",
+      "eco": "Øko",
+      "sleep": "Søvn",
+      "comfort": "Komfort"
+    }
+  },
+  "flow": {
+    "triggers": {
+      "motion_detected": {
+        "title": "Bevegelse oppdaget",
+        "hint": "Når bevegelse oppdages av et kamera"
+      },
+      "person_detected": {
+        "title": "Person oppdaget",
+        "hint": "Når en person oppdages av et kamera"
+      },
+      "face_detected": {
+        "title": "Ansikt gjenkjent",
+        "hint": "Når et kjent ansikt oppdages av et kamera"
+      },
+      "doorbell_pushed": {
+        "title": "Dørklokke trykket",
+        "hint": "Når noen trykker på dørklokken"
+      },
+      "package_delivered": {
+        "title": "Pakke levert",
+        "hint": "Når en pakkelevering oppdages"
+      },
+      "package_retrieved": {
+        "title": "Pakke hentet",
+        "hint": "Når en pakke hentes"
+      },
+      "lock_jammed": {
+        "title": "Lås blokkert",
+        "hint": "Når en lås rapporterer en blokkert tilstand"
+      },
+      "garage_obstructed": {
+        "title": "Garasjeport blokkert",
+        "hint": "Når en hindring oppdages i garasjeportens bane"
+      },
+      "hub_offline": {
+        "title": "Hub frakoblet",
+        "hint": "Når en Starling Hub blir utilgjengelig"
+      },
+      "hub_online": {
+        "title": "Hub tilkoblet",
+        "hint": "Når en Starling Hub blir tilgjengelig igjen"
+      },
+      "command_failed": {
+        "title": "Kommando mislyktes",
+        "hint": "Når en enhetskommando mislykkes"
+      },
+      "home_away_changed": {
+        "title": "Hjemme/Borte-modus endret",
+        "hint": "Når hjemme/borte-modusen endres"
+      }
+    },
+    "conditions": {
+      "hub_online": {
+        "title": "Huben !{{er|er ikke}} tilkoblet"
+      },
+      "home_away_mode": {
+        "title": "Hjemme/Borte-modus !{{er|er ikke}} ..."
+      }
+    },
+    "actions": {
+      "take_snapshot": {
+        "title": "Ta øyeblikksbilde"
+      },
+      "set_quiet_time": {
+        "title": "Sett stille modus"
+      },
+      "set_thermostat_preset": {
+        "title": "Sett termostatforhåndsinnstilling"
+      },
+      "refresh_devices": {
+        "title": "Oppdater alle enheter"
+      },
+      "set_home_away": {
+        "title": "Sett Hjemme/Borte-modus"
+      }
+    },
+    "tokens": {
+      "face_name": "Ansiktsnavn",
+      "hub_name": "Hubnavn",
+      "device_name": "Enhetsnavn",
+      "error_message": "Feilmelding",
+      "command": "Kommando"
+    }
+  },
+  "errors": {
+    "connection_failed": "Kunne ikke koble til hub",
+    "invalid_api_key": "API-nøkkel avvist. Vennligst verifiser nøkkelen i innstillinger.",
+    "device_not_found": "Enhet ikke lenger tilgjengelig på hub.",
+    "read_only_property": "Denne egenskapen kan ikke endres.",
+    "invalid_value": "Verdi ikke akseptert av enheten.",
+    "set_error": "Google Home avviste endringen.",
+    "no_snapshot": "Kamera-øyeblikksbilde utilgjengelig.",
+    "stream_refused": "Kunne ikke starte videostrøm.",
+    "hub_offline": "Hub svarer ikke.",
+    "rate_limited": "For mange forespørsler. Vennligst vent.",
+    "permission_denied": "Tillatelse ikke gitt for denne handlingen."
+  },
+  "notifications": {
+    "command_failed": {
+      "title": "Kommando Mislyktes",
+      "message": "{{device}}: {{error}}"
+    },
+    "hub_offline": {
+      "title": "Hub Frakoblet",
+      "message": "{{hub}} svarer ikke"
+    },
+    "hub_online": {
+      "title": "Hub Tilkoblet",
+      "message": "{{hub}} er tilkoblet igjen"
+    }
+  }
+}

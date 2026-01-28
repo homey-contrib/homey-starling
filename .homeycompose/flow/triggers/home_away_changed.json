@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Home/Away mode changed"
+  },
+  "titleFormatted": {
+    "en": "Home/Away mode changed to [[mode]]"
+  },
+  "hint": {
+    "en": "Triggers when the Nest Home/Away mode changes."
+  },
+  "tokens": [
+    {
+      "name": "mode",
+      "type": "string",
+      "title": {
+        "en": "Mode"
+      },
+      "example": {
+        "en": "home"
+      }
+    }
+  ]
+}

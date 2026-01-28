@@ -1,0 +1,249 @@
+{
+  "app": {
+    "name": "Starling Home Hub",
+    "description": "Dodaje obsługę urządzeń Google Home przez Starling Home Hub."
+  },
+  "settings": {
+    "title": "Ustawienia Starling Home Hub",
+    "hubs": {
+      "title": "Podłączone Huby",
+      "add": "Dodaj Hub",
+      "edit": "Edytuj Hub",
+      "remove": "Usuń Hub",
+      "none": "Brak skonfigurowanych hubów",
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "connecting": "Łączenie..."
+      }
+    },
+    "hub": {
+      "name": "Nazwa Huba",
+      "host": "Adres IP / Nazwa hosta",
+      "apiKey": "Klucz API",
+      "protocol": "Protokół",
+      "permissions": "Uprawnienia",
+      "deviceCount": "Urządzenia",
+      "testConnection": "Testuj Połączenie",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
+    },
+    "permissions": {
+      "read": "Odczyt",
+      "write": "Zapis",
+      "camera": "Kamera"
+    },
+    "global": {
+      "title": "Ustawienia Globalne",
+      "debugMode": "Tryb Debugowania",
+      "debugModeDescription": "Włącz szczegółowe logowanie do rozwiązywania problemów",
+      "pollInterval": "Interwał Odpytywania (sekundy)",
+      "pollIntervalDescription": "Jak często sprawdzać zmiany stanu urządzeń"
+    },
+    "diagnostics": {
+      "title": "Diagnostyka",
+      "lastPoll": "Ostatnie Odpytanie",
+      "lastError": "Ostatni Błąd",
+      "apiVersion": "Wersja API",
+      "errorHistory": "Historia Błędów",
+      "clearErrors": "Wyczyść Historię",
+      "exportLogs": "Eksportuj Logi",
+      "noErrors": "Brak zarejestrowanych błędów"
+    },
+    "hubRemoval": {
+      "title": "Usuń Hub",
+      "message": "Co chcesz zrobić z urządzeniami z tego huba?",
+      "deleteDevices": "Usuń wszystkie urządzenia",
+      "keepDevices": "Zachowaj urządzenia (oznacz jako niedostępne)"
+    }
+  },
+  "pairing": {
+    "selectHub": "Wybierz Hub",
+    "selectHubDescription": "Wybierz hub, z którego chcesz dodać urządzenia",
+    "discovery": {
+      "title": "Odkryj Huby",
+      "searching": "Szukanie Starling Hubów...",
+      "found": "Znaleziono {{count}} hub(ów)",
+      "notFound": "Nie znaleziono hubów",
+      "manual": "Dodaj Ręcznie"
+    },
+    "devices": {
+      "title": "Wybierz Urządzenia",
+      "selectAll": "Dodaj Wszystkie Urządzenia",
+      "selectCategory": "Filtruj według Kategorii",
+      "selectIndividual": "Wybierz Poszczególne Urządzenia",
+      "noDevices": "Nie znaleziono urządzeń na tym hubie"
+    },
+    "zone": {
+      "title": "Przypisz Strefy",
+      "suggestion": "Sugerowana strefa: {{zone}}",
+      "select": "Wybierz Strefę"
+    },
+    "confirm": {
+      "title": "Potwierdź",
+      "adding": "Dodawanie {{count}} urządzenia/urządzeń..."
+    }
+  },
+  "devices": {
+    "categories": {
+      "cam": "Kamera",
+      "diffuser": "Dyfuzor",
+      "fan": "Wentylator",
+      "garage": "Brama Garażowa",
+      "heater_cooler": "Ogrzewanie/Chłodzenie",
+      "home_away_control": "W Domu/Poza Domem",
+      "humidifier_dehumidifier": "Nawilżacz/Osuszacz",
+      "kettle": "Czajnik",
+      "light": "Światło",
+      "lock": "Zamek",
+      "open_close": "Żaluzje/Zasłony",
+      "outlet": "Gniazdko",
+      "purifier": "Oczyszczacz Powietrza",
+      "robot": "Robot Odkurzający",
+      "sensor": "Czujnik",
+      "smoke_co_detector": "Czujnik Dymu/CO",
+      "switch": "Przełącznik",
+      "thermostat": "Termostat",
+      "valve": "Zawór"
+    },
+    "status": {
+      "unavailable": "Urządzenie niedostępne",
+      "permissionDenied": "Brak uprawnień"
+    }
+  },
+  "capabilities": {
+    "hvac_state": {
+      "off": "Wyłączone",
+      "heating": "Ogrzewanie",
+      "cooling": "Chłodzenie"
+    },
+    "home_away_mode": {
+      "home": "W Domu",
+      "away": "Poza Domem"
+    },
+    "vacuum_state": {
+      "cleaning": "Sprzątanie",
+      "docked": "W stacji",
+      "returning": "Powrót do stacji",
+      "paused": "Wstrzymane",
+      "error": "Błąd"
+    },
+    "thermostat_preset": {
+      "none": "Brak",
+      "eco": "Eko",
+      "sleep": "Sen",
+      "comfort": "Komfort"
+    }
+  },
+  "flow": {
+    "triggers": {
+      "motion_detected": {
+        "title": "Wykryto ruch",
+        "hint": "Gdy kamera wykryje ruch"
+      },
+      "person_detected": {
+        "title": "Wykryto osobę",
+        "hint": "Gdy kamera wykryje osobę"
+      },
+      "face_detected": {
+        "title": "Rozpoznano twarz",
+        "hint": "Gdy kamera rozpozna znaną twarz"
+      },
+      "doorbell_pushed": {
+        "title": "Naciśnięto dzwonek",
+        "hint": "Gdy ktoś naciśnie dzwonek"
+      },
+      "package_delivered": {
+        "title": "Dostarczono paczkę",
+        "hint": "Gdy wykryto dostawę paczki"
+      },
+      "package_retrieved": {
+        "title": "Odebrano paczkę",
+        "hint": "Gdy paczka zostanie odebrana"
+      },
+      "lock_jammed": {
+        "title": "Zamek zablokowany",
+        "hint": "Gdy zamek zgłosi stan zablokowania"
+      },
+      "garage_obstructed": {
+        "title": "Brama garażowa zablokowana",
+        "hint": "Gdy wykryto przeszkodę na drodze bramy garażowej"
+      },
+      "hub_offline": {
+        "title": "Hub offline",
+        "hint": "Gdy Starling Hub stanie się niedostępny"
+      },
+      "hub_online": {
+        "title": "Hub online",
+        "hint": "Gdy Starling Hub znów stanie się dostępny"
+      },
+      "command_failed": {
+        "title": "Polecenie nie powiodło się",
+        "hint": "Gdy polecenie urządzenia nie zostanie wykonane"
+      },
+      "home_away_changed": {
+        "title": "Zmieniono tryb W Domu/Poza Domem",
+        "hint": "Gdy zmieni się tryb w domu/poza domem"
+      }
+    },
+    "conditions": {
+      "hub_online": {
+        "title": "Hub !{{jest|nie jest}} online"
+      },
+      "home_away_mode": {
+        "title": "Tryb W Domu/Poza Domem !{{jest|nie jest}} ..."
+      }
+    },
+    "actions": {
+      "take_snapshot": {
+        "title": "Zrób zdjęcie"
+      },
+      "set_quiet_time": {
+        "title": "Ustaw tryb cichy"
+      },
+      "set_thermostat_preset": {
+        "title": "Ustaw preset termostatu"
+      },
+      "refresh_devices": {
+        "title": "Odśwież wszystkie urządzenia"
+      },
+      "set_home_away": {
+        "title": "Ustaw tryb W Domu/Poza Domem"
+      }
+    },
+    "tokens": {
+      "face_name": "Nazwa twarzy",
+      "hub_name": "Nazwa huba",
+      "device_name": "Nazwa urządzenia",
+      "error_message": "Komunikat błędu",
+      "command": "Polecenie"
+    }
+  },
+  "errors": {
+    "connection_failed": "Nie udało się połączyć z hubem",
+    "invalid_api_key": "Klucz API odrzucony. Sprawdź klucz w ustawieniach.",
+    "device_not_found": "Urządzenie nie jest już dostępne na hubie.",
+    "read_only_property": "Ta właściwość nie może być zmieniona.",
+    "invalid_value": "Wartość nie zaakceptowana przez urządzenie.",
+    "set_error": "Google Home odrzuciło zmianę.",
+    "no_snapshot": "Zdjęcie z kamery niedostępne.",
+    "stream_refused": "Nie udało się uruchomić strumienia wideo.",
+    "hub_offline": "Hub nie odpowiada.",
+    "rate_limited": "Zbyt wiele żądań. Proszę czekać.",
+    "permission_denied": "Brak uprawnień do tej akcji."
+  },
+  "notifications": {
+    "command_failed": {
+      "title": "Polecenie Nie Powiodło Się",
+      "message": "{{device}}: {{error}}"
+    },
+    "hub_offline": {
+      "title": "Hub Offline",
+      "message": "{{hub}} nie odpowiada"
+    },
+    "hub_online": {
+      "title": "Hub Online",
+      "message": "{{hub}} jest znów online"
+    }
+  }
+}

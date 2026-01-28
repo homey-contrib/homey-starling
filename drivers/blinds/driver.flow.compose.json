@@ -1,0 +1,50 @@
+{
+  "triggers": [
+    {
+      "id": "opened",
+      "title": {
+        "en": "Fully opened"
+      },
+      "hint": {
+        "en": "Triggers when the blinds are fully opened."
+      }
+    },
+    {
+      "id": "closed",
+      "title": {
+        "en": "Fully closed"
+      },
+      "hint": {
+        "en": "Triggers when the blinds are fully closed."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "set_position",
+      "title": {
+        "en": "Set position"
+      },
+      "titleFormatted": {
+        "en": "Set position to [[position]]%"
+      },
+      "hint": {
+        "en": "Set the blinds to a specific position."
+      },
+      "args": [
+        {
+          "name": "position",
+          "type": "range",
+          "title": {
+            "en": "Position"
+          },
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "label": "%",
+          "labelDecimals": 0
+        }
+      ]
+    }
+  ]
+}

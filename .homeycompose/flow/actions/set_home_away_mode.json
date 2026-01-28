@@ -1,0 +1,34 @@
+{
+  "title": {
+    "en": "Set Home/Away mode"
+  },
+  "titleFormatted": {
+    "en": "Set Home/Away mode to [[mode]]"
+  },
+  "hint": {
+    "en": "Set the Nest Home/Away mode."
+  },
+  "args": [
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": {
+        "en": "Mode"
+      },
+      "values": [
+        {
+          "id": "home",
+          "title": {
+            "en": "Home"
+          }
+        },
+        {
+          "id": "away",
+          "title": {
+            "en": "Away"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": {
+    "en": "Robot Vacuum"
+  },
+  "class": "vacuumcleaner",
+  "capabilities": [
+    "onoff",
+    "measure_battery",
+    "vacuum_state"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": {
+        "en": "Cleaning"
+      },
+      "insightsTitleTrue": {
+        "en": "Started cleaning"
+      },
+      "insightsTitleFalse": {
+        "en": "Stopped cleaning"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/robot/assets/images/small.png",
+    "large": "/drivers/robot/assets/images/large.png",
+    "xlarge": "/drivers/robot/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Device Information"
+      },
+      "children": [
+        {
+          "id": "model",
+          "type": "label",
+          "label": {
+            "en": "Model"
+          },
+          "value": ""
+        },
+        {
+          "id": "room",
+          "type": "label",
+          "label": {
+            "en": "Room"
+          },
+          "value": ""
+        },
+        {
+          "id": "structure",
+          "type": "label",
+          "label": {
+            "en": "Structure"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

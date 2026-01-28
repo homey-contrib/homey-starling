@@ -1,0 +1,69 @@
+{
+  "triggers": [
+    {
+      "id": "smoke_detected",
+      "title": {
+        "en": "Smoke detected"
+      },
+      "hint": {
+        "en": "Triggers when smoke is detected."
+      }
+    },
+    {
+      "id": "smoke_cleared",
+      "title": {
+        "en": "Smoke cleared"
+      },
+      "hint": {
+        "en": "Triggers when smoke is no longer detected."
+      }
+    },
+    {
+      "id": "co_detected",
+      "title": {
+        "en": "Carbon monoxide detected"
+      },
+      "hint": {
+        "en": "Triggers when carbon monoxide is detected."
+      }
+    },
+    {
+      "id": "co_cleared",
+      "title": {
+        "en": "Carbon monoxide cleared"
+      },
+      "hint": {
+        "en": "Triggers when carbon monoxide is no longer detected."
+      }
+    },
+    {
+      "id": "smoke_co_battery_low",
+      "title": {
+        "en": "Battery is low"
+      },
+      "hint": {
+        "en": "Triggers when the detector battery level is low."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "smoke_is_detected",
+      "title": {
+        "en": "Smoke !{{is|isn't}} detected"
+      },
+      "hint": {
+        "en": "Check if smoke is currently detected."
+      }
+    },
+    {
+      "id": "co_is_detected",
+      "title": {
+        "en": "Carbon monoxide !{{is|isn't}} detected"
+      },
+      "hint": {
+        "en": "Check if carbon monoxide is currently detected."
+      }
+    }
+  ]
+}

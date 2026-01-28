@@ -1,0 +1,55 @@
+{
+  "title": {
+    "en": "A familiar face was detected"
+  },
+  "titleFormatted": {
+    "en": "[[person]] was detected at [[camera]]"
+  },
+  "hint": {
+    "en": "Triggers when a recognized face is detected by a Nest camera. Requires Nest Aware subscription."
+  },
+  "args": [
+    {
+      "type": "autocomplete",
+      "name": "person",
+      "title": {
+        "en": "Person"
+      },
+      "placeholder": {
+        "en": "Select a person..."
+      }
+    },
+    {
+      "type": "autocomplete",
+      "name": "camera",
+      "title": {
+        "en": "Camera"
+      },
+      "placeholder": {
+        "en": "Select a camera..."
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "person_name",
+      "type": "string",
+      "title": {
+        "en": "Person"
+      },
+      "example": {
+        "en": "John"
+      }
+    },
+    {
+      "name": "camera_name",
+      "type": "string",
+      "title": {
+        "en": "Camera"
+      },
+      "example": {
+        "en": "Front Door"
+      }
+    }
+  ]
+}

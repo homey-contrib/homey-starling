@@ -1,0 +1,39 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Thermostat Preset"
+  },
+  "desc": {
+    "en": "The active thermostat preset mode"
+  },
+  "values": [
+    {
+      "id": "none",
+      "title": {
+        "en": "None"
+      }
+    },
+    {
+      "id": "eco",
+      "title": {
+        "en": "Eco"
+      }
+    },
+    {
+      "id": "sleep",
+      "title": {
+        "en": "Sleep"
+      }
+    },
+    {
+      "id": "comfort",
+      "title": {
+        "en": "Comfort"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "icon": "/assets/capabilities/thermostat_preset.svg"
+}

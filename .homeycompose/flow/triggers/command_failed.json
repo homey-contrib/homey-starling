@@ -1,0 +1,43 @@
+{
+  "title": {
+    "en": "A device command failed"
+  },
+  "titleFormatted": {
+    "en": "Command failed on [[device_name]]"
+  },
+  "hint": {
+    "en": "Triggers when a command to a Starling device fails."
+  },
+  "tokens": [
+    {
+      "name": "device_name",
+      "type": "string",
+      "title": {
+        "en": "Device"
+      },
+      "example": {
+        "en": "Living Room Light"
+      }
+    },
+    {
+      "name": "command",
+      "type": "string",
+      "title": {
+        "en": "Command"
+      },
+      "example": {
+        "en": "Turn on"
+      }
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "title": {
+        "en": "Error"
+      },
+      "example": {
+        "en": "Device not responding"
+      }
+    }
+  ]
+}

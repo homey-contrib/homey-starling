@@ -1,0 +1,249 @@
+{
+  "app": {
+    "name": "Starling Home Hub",
+    "description": "Adds support for Google Home devices via the Starling Home Hub."
+  },
+  "settings": {
+    "title": "Starling Home Hub Settings",
+    "hubs": {
+      "title": "Connected Hubs",
+      "add": "Add Hub",
+      "edit": "Edit Hub",
+      "remove": "Remove Hub",
+      "none": "No hubs configured",
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "connecting": "Connecting..."
+      }
+    },
+    "hub": {
+      "name": "Hub Name",
+      "host": "IP Address / Hostname",
+      "apiKey": "API Key",
+      "protocol": "Protocol",
+      "permissions": "Permissions",
+      "deviceCount": "Devices",
+      "testConnection": "Test Connection",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "permissions": {
+      "read": "Read",
+      "write": "Write",
+      "camera": "Camera"
+    },
+    "global": {
+      "title": "Global Settings",
+      "debugMode": "Debug Mode",
+      "debugModeDescription": "Enable verbose logging for troubleshooting",
+      "pollInterval": "Poll Interval (seconds)",
+      "pollIntervalDescription": "How often to check for device state changes"
+    },
+    "diagnostics": {
+      "title": "Diagnostics",
+      "lastPoll": "Last Poll",
+      "lastError": "Last Error",
+      "apiVersion": "API Version",
+      "errorHistory": "Error History",
+      "clearErrors": "Clear Error History",
+      "exportLogs": "Export Logs",
+      "noErrors": "No errors recorded"
+    },
+    "hubRemoval": {
+      "title": "Remove Hub",
+      "message": "What would you like to do with the devices from this hub?",
+      "deleteDevices": "Delete all devices",
+      "keepDevices": "Keep devices (mark unavailable)"
+    }
+  },
+  "pairing": {
+    "selectHub": "Select Hub",
+    "selectHubDescription": "Choose a hub to add devices from",
+    "discovery": {
+      "title": "Discover Hubs",
+      "searching": "Searching for Starling Hubs...",
+      "found": "Found {{count}} hub(s)",
+      "notFound": "No hubs found",
+      "manual": "Add Manually"
+    },
+    "devices": {
+      "title": "Select Devices",
+      "selectAll": "Add All Devices",
+      "selectCategory": "Filter by Category",
+      "selectIndividual": "Select Individual Devices",
+      "noDevices": "No devices found on this hub"
+    },
+    "zone": {
+      "title": "Assign Zones",
+      "suggestion": "Suggested zone: {{zone}}",
+      "select": "Select Zone"
+    },
+    "confirm": {
+      "title": "Confirm",
+      "adding": "Adding {{count}} device(s)..."
+    }
+  },
+  "devices": {
+    "categories": {
+      "cam": "Camera",
+      "diffuser": "Diffuser",
+      "fan": "Fan",
+      "garage": "Garage Door",
+      "heater_cooler": "Heater/Cooler",
+      "home_away_control": "Home/Away",
+      "humidifier_dehumidifier": "Humidifier/Dehumidifier",
+      "kettle": "Kettle",
+      "light": "Light",
+      "lock": "Lock",
+      "open_close": "Blinds/Curtains",
+      "outlet": "Outlet",
+      "purifier": "Air Purifier",
+      "robot": "Robot Vacuum",
+      "sensor": "Sensor",
+      "smoke_co_detector": "Smoke/CO Detector",
+      "switch": "Switch",
+      "thermostat": "Thermostat",
+      "valve": "Valve"
+    },
+    "status": {
+      "unavailable": "Device unavailable",
+      "permissionDenied": "Permission not granted"
+    }
+  },
+  "capabilities": {
+    "hvac_state": {
+      "off": "Off",
+      "heating": "Heating",
+      "cooling": "Cooling"
+    },
+    "home_away_mode": {
+      "home": "Home",
+      "away": "Away"
+    },
+    "vacuum_state": {
+      "cleaning": "Cleaning",
+      "docked": "Docked",
+      "returning": "Returning to Dock",
+      "paused": "Paused",
+      "error": "Error"
+    },
+    "thermostat_preset": {
+      "none": "None",
+      "eco": "Eco",
+      "sleep": "Sleep",
+      "comfort": "Comfort"
+    }
+  },
+  "flow": {
+    "triggers": {
+      "motion_detected": {
+        "title": "Motion detected",
+        "hint": "When motion is detected on a camera"
+      },
+      "person_detected": {
+        "title": "Person detected",
+        "hint": "When a person is detected on a camera"
+      },
+      "face_detected": {
+        "title": "Face detected",
+        "hint": "When a known face is detected on a camera"
+      },
+      "doorbell_pushed": {
+        "title": "Doorbell pushed",
+        "hint": "When someone pushes the doorbell"
+      },
+      "package_delivered": {
+        "title": "Package delivered",
+        "hint": "When a package delivery is detected"
+      },
+      "package_retrieved": {
+        "title": "Package retrieved",
+        "hint": "When a package is picked up"
+      },
+      "lock_jammed": {
+        "title": "Lock jammed",
+        "hint": "When a lock reports a jammed state"
+      },
+      "garage_obstructed": {
+        "title": "Garage door obstructed",
+        "hint": "When an obstruction is detected in the garage door path"
+      },
+      "hub_offline": {
+        "title": "Hub went offline",
+        "hint": "When a Starling Hub becomes unreachable"
+      },
+      "hub_online": {
+        "title": "Hub came online",
+        "hint": "When a Starling Hub becomes reachable again"
+      },
+      "command_failed": {
+        "title": "Command failed",
+        "hint": "When a device command fails to execute"
+      },
+      "home_away_changed": {
+        "title": "Home/Away mode changed",
+        "hint": "When the home/away mode changes"
+      }
+    },
+    "conditions": {
+      "hub_online": {
+        "title": "Hub !{{is|isn't}} online"
+      },
+      "home_away_mode": {
+        "title": "Home/Away mode !{{is|isn't}} ..."
+      }
+    },
+    "actions": {
+      "take_snapshot": {
+        "title": "Take snapshot"
+      },
+      "set_quiet_time": {
+        "title": "Set quiet time"
+      },
+      "set_thermostat_preset": {
+        "title": "Set thermostat preset"
+      },
+      "refresh_devices": {
+        "title": "Refresh all devices"
+      },
+      "set_home_away": {
+        "title": "Set Home/Away mode"
+      }
+    },
+    "tokens": {
+      "face_name": "Face name",
+      "hub_name": "Hub name",
+      "device_name": "Device name",
+      "error_message": "Error message",
+      "command": "Command"
+    }
+  },
+  "errors": {
+    "connection_failed": "Failed to connect to hub",
+    "invalid_api_key": "API key rejected. Please verify key in settings.",
+    "device_not_found": "Device no longer available on hub.",
+    "read_only_property": "This property cannot be changed.",
+    "invalid_value": "Value not accepted by device.",
+    "set_error": "Google Home rejected the change.",
+    "no_snapshot": "Camera snapshot unavailable.",
+    "stream_refused": "Could not start video stream.",
+    "hub_offline": "Hub not responding.",
+    "rate_limited": "Too many requests. Please wait.",
+    "permission_denied": "Permission not granted for this action."
+  },
+  "notifications": {
+    "command_failed": {
+      "title": "Command Failed",
+      "message": "{{device}}: {{error}}"
+    },
+    "hub_offline": {
+      "title": "Hub Offline",
+      "message": "{{hub}} is not responding"
+    },
+    "hub_online": {
+      "title": "Hub Online",
+      "message": "{{hub}} is back online"
+    }
+  }
+}

@@ -1,0 +1,3646 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.eyecatch.googlenest.starling",
+  "version": "2.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#46a9dd",
+  "name": {
+    "en": "Starling Home Hub"
+  },
+  "description": {
+    "en": "Adds support for Google Home devices via the Starling Home Hub."
+  },
+  "category": [
+    "tools"
+  ],
+  "tags": {
+    "en": [
+      "google",
+      "starling",
+      "nest"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "source": "https://github.com/homey-contrib/homey-starling",
+  "bugs": {
+    "url": "https://github.com/homey-contrib/homey-starling/issues"
+  },
+  "author": {
+    "name": "Andrew R. Mitchell",
+    "email": "apps@@andrewrmitchell.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "version": "1.0.0",
+        "name": "Ove Andersen",
+        "email": "ove.andersen@outlook.com"
+      },
+      {
+        "version": "2.0.0",
+        "name": "Andrew R. Mitchell",
+        "email": "apps@@andrewrmitchell.com"
+      }
+    ]
+  },
+  "api": {
+    "getHubs": {
+      "method": "GET",
+      "path": "/hubs"
+    },
+    "addHub": {
+      "method": "POST",
+      "path": "/hubs"
+    },
+    "updateHub": {
+      "method": "PUT",
+      "path": "/hubs/:id"
+    },
+    "deleteHub": {
+      "method": "DELETE",
+      "path": "/hubs/:id"
+    },
+    "testHub": {
+      "method": "POST",
+      "path": "/hubs/:id/test"
+    },
+    "testNewHub": {
+      "method": "POST",
+      "path": "/hubs/test"
+    },
+    "getSettings": {
+      "method": "GET",
+      "path": "/settings"
+    },
+    "updateSettings": {
+      "method": "PUT",
+      "path": "/settings"
+    },
+    "getDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics"
+    },
+    "exportDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics/export"
+    },
+    "startDiscoveryScan": {
+      "method": "POST",
+      "path": "/discovery/scan"
+    },
+    "getDiscoveryResults": {
+      "method": "GET",
+      "path": "/discovery/results"
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "A device command failed"
+        },
+        "titleFormatted": {
+          "en": "Command failed on [[device_name]]"
+        },
+        "hint": {
+          "en": "Triggers when a command to a Starling device fails."
+        },
+        "tokens": [
+          {
+            "name": "device_name",
+            "type": "string",
+            "title": {
+              "en": "Device"
+            },
+            "example": {
+              "en": "Living Room Light"
+            }
+          },
+          {
+            "name": "command",
+            "type": "string",
+            "title": {
+              "en": "Command"
+            },
+            "example": {
+              "en": "Turn on"
+            }
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "title": {
+              "en": "Error"
+            },
+            "example": {
+              "en": "Device not responding"
+            }
+          }
+        ],
+        "id": "command_failed"
+      },
+      {
+        "title": {
+          "en": "A familiar face was detected"
+        },
+        "titleFormatted": {
+          "en": "[[person]] was detected at [[camera]]"
+        },
+        "hint": {
+          "en": "Triggers when a recognized face is detected by a Nest camera. Requires Nest Aware subscription."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "person",
+            "title": {
+              "en": "Person"
+            },
+            "placeholder": {
+              "en": "Select a person..."
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "camera",
+            "title": {
+              "en": "Camera"
+            },
+            "placeholder": {
+              "en": "Select a camera..."
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "person_name",
+            "type": "string",
+            "title": {
+              "en": "Person"
+            },
+            "example": {
+              "en": "John"
+            }
+          },
+          {
+            "name": "camera_name",
+            "type": "string",
+            "title": {
+              "en": "Camera"
+            },
+            "example": {
+              "en": "Front Door"
+            }
+          }
+        ],
+        "id": "face_detected"
+      },
+      {
+        "title": {
+          "en": "Home/Away mode changed"
+        },
+        "titleFormatted": {
+          "en": "Home/Away mode changed to [[mode]]"
+        },
+        "hint": {
+          "en": "Triggers when the Nest Home/Away mode changes."
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode"
+            },
+            "example": {
+              "en": "home"
+            }
+          }
+        ],
+        "id": "home_away_changed"
+      },
+      {
+        "title": {
+          "en": "A hub went offline"
+        },
+        "titleFormatted": {
+          "en": "[[hub_name]] went offline"
+        },
+        "hint": {
+          "en": "Triggers when a Starling Hub becomes unreachable."
+        },
+        "tokens": [
+          {
+            "name": "hub_name",
+            "type": "string",
+            "title": {
+              "en": "Hub Name"
+            },
+            "example": {
+              "en": "Living Room Hub"
+            }
+          }
+        ],
+        "id": "hub_offline"
+      },
+      {
+        "title": {
+          "en": "A hub came online"
+        },
+        "titleFormatted": {
+          "en": "[[hub_name]] came online"
+        },
+        "hint": {
+          "en": "Triggers when a Starling Hub reconnects."
+        },
+        "tokens": [
+          {
+            "name": "hub_name",
+            "type": "string",
+            "title": {
+              "en": "Hub Name"
+            },
+            "example": {
+              "en": "Living Room Hub"
+            }
+          }
+        ],
+        "id": "hub_online"
+      },
+      {
+        "id": "opened",
+        "title": {
+          "en": "Fully opened"
+        },
+        "hint": {
+          "en": "Triggers when the blinds are fully opened."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=blinds"
+          }
+        ]
+      },
+      {
+        "id": "closed",
+        "title": {
+          "en": "Fully closed"
+        },
+        "hint": {
+          "en": "Triggers when the blinds are fully closed."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=blinds"
+          }
+        ]
+      },
+      {
+        "id": "person_detected",
+        "title": {
+          "en": "Person detected"
+        },
+        "hint": {
+          "en": "Triggers when a person is detected by the camera."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "animal_detected",
+        "title": {
+          "en": "Animal detected"
+        },
+        "hint": {
+          "en": "Triggers when an animal is detected by the camera."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "vehicle_detected",
+        "title": {
+          "en": "Vehicle detected"
+        },
+        "hint": {
+          "en": "Triggers when a vehicle is detected by the camera."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "package_delivered",
+        "title": {
+          "en": "Package delivered"
+        },
+        "hint": {
+          "en": "Triggers when a package delivery is detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "package_retrieved",
+        "title": {
+          "en": "Package retrieved"
+        },
+        "hint": {
+          "en": "Triggers when a delivered package is picked up."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_person_detected",
+        "title": {
+          "en": "Person detected"
+        },
+        "hint": {
+          "en": "Triggers when a person is detected by the doorbell."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_animal_detected",
+        "title": {
+          "en": "Animal detected"
+        },
+        "hint": {
+          "en": "Triggers when an animal is detected by the doorbell."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_vehicle_detected",
+        "title": {
+          "en": "Vehicle detected"
+        },
+        "hint": {
+          "en": "Triggers when a vehicle is detected by the doorbell."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_pressed",
+        "title": {
+          "en": "Doorbell pressed"
+        },
+        "hint": {
+          "en": "Triggers when the doorbell button is pressed."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_package_delivered",
+        "title": {
+          "en": "Package delivered"
+        },
+        "hint": {
+          "en": "Triggers when a package delivery is detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_package_retrieved",
+        "title": {
+          "en": "Package retrieved"
+        },
+        "hint": {
+          "en": "Triggers when a delivered package is picked up."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "obstruction_detected",
+        "title": {
+          "en": "Obstruction detected"
+        },
+        "hint": {
+          "en": "Triggers when an obstruction is detected in the garage door path."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage"
+          }
+        ]
+      },
+      {
+        "id": "obstruction_cleared",
+        "title": {
+          "en": "Obstruction cleared"
+        },
+        "hint": {
+          "en": "Triggers when the garage door obstruction is cleared."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage"
+          }
+        ]
+      },
+      {
+        "id": "door_opened",
+        "title": {
+          "en": "Garage door opened"
+        },
+        "hint": {
+          "en": "Triggers when the garage door is fully opened."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage"
+          }
+        ]
+      },
+      {
+        "id": "door_closed",
+        "title": {
+          "en": "Garage door closed"
+        },
+        "hint": {
+          "en": "Triggers when the garage door is fully closed."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage"
+          }
+        ]
+      },
+      {
+        "id": "changed_to_home",
+        "title": {
+          "en": "Changed to home"
+        },
+        "hint": {
+          "en": "Triggers when this structure is set to home."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=home-away"
+          }
+        ]
+      },
+      {
+        "id": "changed_to_away",
+        "title": {
+          "en": "Changed to away"
+        },
+        "hint": {
+          "en": "Triggers when this structure is set to away."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=home-away"
+          }
+        ]
+      },
+      {
+        "id": "lock_jammed",
+        "title": {
+          "en": "Lock is jammed"
+        },
+        "hint": {
+          "en": "Triggers when the lock reports a jammed state."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=lock"
+          }
+        ]
+      },
+      {
+        "id": "lock_state_changed",
+        "title": {
+          "en": "Lock state changed"
+        },
+        "titleFormatted": {
+          "en": "Lock changed to [[state]]"
+        },
+        "hint": {
+          "en": "Triggers when the lock state changes."
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "string",
+            "title": {
+              "en": "State"
+            },
+            "example": {
+              "en": "locked"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=lock"
+          }
+        ]
+      },
+      {
+        "id": "started_cleaning",
+        "title": {
+          "en": "Started cleaning"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum starts cleaning."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "stopped_cleaning",
+        "title": {
+          "en": "Stopped cleaning"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum stops cleaning."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "docked",
+        "title": {
+          "en": "Vacuum docked"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum returns to its dock."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "undocked",
+        "title": {
+          "en": "Vacuum undocked"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum leaves its dock."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "robot_battery_low",
+        "title": {
+          "en": "Battery is low"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum battery level is low."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "error_occurred",
+        "title": {
+          "en": "An error occurred"
+        },
+        "hint": {
+          "en": "Triggers when the vacuum encounters an error."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "water_leak_detected",
+        "title": {
+          "en": "Water leak detected"
+        },
+        "hint": {
+          "en": "Triggers when a water leak is detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          }
+        ]
+      },
+      {
+        "id": "water_leak_cleared",
+        "title": {
+          "en": "Water leak cleared"
+        },
+        "hint": {
+          "en": "Triggers when the water leak is no longer detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          }
+        ]
+      },
+      {
+        "id": "temperature_above",
+        "title": {
+          "en": "Temperature rose above..."
+        },
+        "titleFormatted": {
+          "en": "Temperature rose above [[temperature]] C"
+        },
+        "hint": {
+          "en": "Triggers when temperature rises above a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature"
+            },
+            "min": -40,
+            "max": 60,
+            "step": 0.5
+          }
+        ]
+      },
+      {
+        "id": "temperature_below",
+        "title": {
+          "en": "Temperature dropped below..."
+        },
+        "titleFormatted": {
+          "en": "Temperature dropped below [[temperature]] C"
+        },
+        "hint": {
+          "en": "Triggers when temperature drops below a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature"
+            },
+            "min": -40,
+            "max": 60,
+            "step": 0.5
+          }
+        ]
+      },
+      {
+        "id": "humidity_above",
+        "title": {
+          "en": "Humidity rose above..."
+        },
+        "titleFormatted": {
+          "en": "Humidity rose above [[humidity]]%"
+        },
+        "hint": {
+          "en": "Triggers when humidity rises above a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "humidity",
+            "type": "number",
+            "title": {
+              "en": "Humidity"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "humidity_below",
+        "title": {
+          "en": "Humidity dropped below..."
+        },
+        "titleFormatted": {
+          "en": "Humidity dropped below [[humidity]]%"
+        },
+        "hint": {
+          "en": "Triggers when humidity drops below a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "humidity",
+            "type": "number",
+            "title": {
+              "en": "Humidity"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "smoke_detected",
+        "title": {
+          "en": "Smoke detected"
+        },
+        "hint": {
+          "en": "Triggers when smoke is detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "smoke_cleared",
+        "title": {
+          "en": "Smoke cleared"
+        },
+        "hint": {
+          "en": "Triggers when smoke is no longer detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "co_detected",
+        "title": {
+          "en": "Carbon monoxide detected"
+        },
+        "hint": {
+          "en": "Triggers when carbon monoxide is detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "co_cleared",
+        "title": {
+          "en": "Carbon monoxide cleared"
+        },
+        "hint": {
+          "en": "Triggers when carbon monoxide is no longer detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "smoke_co_battery_low",
+        "title": {
+          "en": "Battery is low"
+        },
+        "hint": {
+          "en": "Triggers when the detector battery level is low."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "hvac_state_changed",
+        "title": {
+          "en": "HVAC state changed"
+        },
+        "titleFormatted": {
+          "en": "HVAC changed to [[state]]"
+        },
+        "hint": {
+          "en": "Triggers when the HVAC starts or stops heating/cooling."
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "string",
+            "title": {
+              "en": "State"
+            },
+            "example": {
+              "en": "heating"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "hvac_mode_changed",
+        "title": {
+          "en": "HVAC mode changed"
+        },
+        "titleFormatted": {
+          "en": "HVAC mode changed to [[mode]]"
+        },
+        "hint": {
+          "en": "Triggers when the HVAC mode is changed."
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode"
+            },
+            "example": {
+              "en": "heat"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "eco_mode_changed",
+        "title": {
+          "en": "Eco mode changed"
+        },
+        "titleFormatted": {
+          "en": "Eco mode [[state]]"
+        },
+        "hint": {
+          "en": "Triggers when eco mode is enabled or disabled."
+        },
+        "tokens": [
+          {
+            "name": "state",
+            "type": "string",
+            "title": {
+              "en": "State"
+            },
+            "example": {
+              "en": "enabled"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "valve_opened",
+        "title": {
+          "en": "Valve opened"
+        },
+        "hint": {
+          "en": "Triggers when the valve is opened."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=valve"
+          }
+        ]
+      },
+      {
+        "id": "valve_closed",
+        "title": {
+          "en": "Valve closed"
+        },
+        "hint": {
+          "en": "Triggers when the valve is closed."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=valve"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "Home/Away mode !{{is|isn't}} ..."
+        },
+        "titleFormatted": {
+          "en": "Home/Away mode !{{is|isn't}} [[mode]]"
+        },
+        "hint": {
+          "en": "Check if the Nest Home/Away mode is set to a specific value."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "home",
+                "title": {
+                  "en": "Home"
+                }
+              },
+              {
+                "id": "away",
+                "title": {
+                  "en": "Away"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "home_away_mode_is"
+      },
+      {
+        "title": {
+          "en": "Hub !{{is|isn't}} online"
+        },
+        "titleFormatted": {
+          "en": "[[hub]] !{{is|isn't}} online"
+        },
+        "hint": {
+          "en": "Check if a Starling Hub is currently reachable."
+        },
+        "args": [
+          {
+            "name": "hub",
+            "type": "autocomplete",
+            "title": {
+              "en": "Hub"
+            },
+            "placeholder": {
+              "en": "Select hub..."
+            }
+          }
+        ],
+        "id": "hub_is_online"
+      },
+      {
+        "id": "is_motion_detected",
+        "title": {
+          "en": "Motion !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if motion is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "is_person_detected",
+        "title": {
+          "en": "A person !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if a person is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "quiet_time_is_enabled",
+        "title": {
+          "en": "Quiet time !{{is|isn't}} enabled"
+        },
+        "hint": {
+          "en": "Check if quiet time is enabled on the camera."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_is_motion_detected",
+        "title": {
+          "en": "Motion !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if motion is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_is_person_detected",
+        "title": {
+          "en": "A person !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if a person is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_quiet_time_is_enabled",
+        "title": {
+          "en": "Quiet time !{{is|isn't}} enabled"
+        },
+        "hint": {
+          "en": "Check if quiet time is enabled on the doorbell."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "is_obstructed",
+        "title": {
+          "en": "Garage door !{{is|isn't}} obstructed"
+        },
+        "hint": {
+          "en": "Check if an obstruction is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage"
+          }
+        ]
+      },
+      {
+        "id": "mode_is",
+        "title": {
+          "en": "Mode is ..."
+        },
+        "titleFormatted": {
+          "en": "Mode !{{is|isn't}} [[mode]]"
+        },
+        "hint": {
+          "en": "Check if this structure's Home/Away mode matches."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=home-away"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "home",
+                "title": {
+                  "en": "Home"
+                }
+              },
+              {
+                "id": "away",
+                "title": {
+                  "en": "Away"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "is_jammed",
+        "title": {
+          "en": "Lock !{{is|isn't}} jammed"
+        },
+        "hint": {
+          "en": "Check if the lock is currently jammed."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=lock"
+          }
+        ]
+      },
+      {
+        "id": "is_cleaning",
+        "title": {
+          "en": "Vacuum !{{is|isn't}} cleaning"
+        },
+        "hint": {
+          "en": "Check if the vacuum is currently cleaning."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "is_docked",
+        "title": {
+          "en": "Vacuum !{{is|isn't}} docked"
+        },
+        "hint": {
+          "en": "Check if the vacuum is currently docked."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "water_leak_is_detected",
+        "title": {
+          "en": "Water leak !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if a water leak is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          }
+        ]
+      },
+      {
+        "id": "temperature_is_above",
+        "title": {
+          "en": "Temperature !{{is|isn't}} above..."
+        },
+        "titleFormatted": {
+          "en": "Temperature !{{is|isn't}} above [[temperature]] C"
+        },
+        "hint": {
+          "en": "Check if temperature is above a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature"
+            },
+            "min": -40,
+            "max": 60,
+            "step": 0.5
+          }
+        ]
+      },
+      {
+        "id": "humidity_is_above",
+        "title": {
+          "en": "Humidity !{{is|isn't}} above..."
+        },
+        "titleFormatted": {
+          "en": "Humidity !{{is|isn't}} above [[humidity]]%"
+        },
+        "hint": {
+          "en": "Check if humidity is above a threshold."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "humidity",
+            "type": "number",
+            "title": {
+              "en": "Humidity"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "smoke_is_detected",
+        "title": {
+          "en": "Smoke !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if smoke is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "co_is_detected",
+        "title": {
+          "en": "Carbon monoxide !{{is|isn't}} detected"
+        },
+        "hint": {
+          "en": "Check if carbon monoxide is currently detected."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=smoke-co-detector"
+          }
+        ]
+      },
+      {
+        "id": "is_heating",
+        "title": {
+          "en": "Thermostat !{{is|isn't}} heating"
+        },
+        "hint": {
+          "en": "Check if the thermostat is currently heating."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "is_cooling",
+        "title": {
+          "en": "Thermostat !{{is|isn't}} cooling"
+        },
+        "hint": {
+          "en": "Check if the thermostat is currently cooling."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "eco_mode_is_enabled",
+        "title": {
+          "en": "Eco mode !{{is|isn't}} enabled"
+        },
+        "hint": {
+          "en": "Check if eco mode is currently enabled."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "title": {
+          "en": "Refresh all devices"
+        },
+        "hint": {
+          "en": "Immediately refresh the state of all devices from all hubs."
+        },
+        "id": "refresh_all_devices"
+      },
+      {
+        "title": {
+          "en": "Refresh devices from hub"
+        },
+        "titleFormatted": {
+          "en": "Refresh all devices from [[hub]]"
+        },
+        "hint": {
+          "en": "Immediately refresh the state of all devices from a specific hub."
+        },
+        "args": [
+          {
+            "name": "hub",
+            "type": "autocomplete",
+            "title": {
+              "en": "Hub"
+            },
+            "placeholder": {
+              "en": "Select hub..."
+            }
+          }
+        ],
+        "id": "refresh_hub_devices"
+      },
+      {
+        "title": {
+          "en": "Set Home/Away mode"
+        },
+        "titleFormatted": {
+          "en": "Set Home/Away mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the Nest Home/Away mode."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "home",
+                "title": {
+                  "en": "Home"
+                }
+              },
+              {
+                "id": "away",
+                "title": {
+                  "en": "Away"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "set_home_away_mode"
+      },
+      {
+        "id": "set_position",
+        "title": {
+          "en": "Set position"
+        },
+        "titleFormatted": {
+          "en": "Set position to [[position]]%"
+        },
+        "hint": {
+          "en": "Set the blinds to a specific position."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=blinds"
+          },
+          {
+            "name": "position",
+            "type": "range",
+            "title": {
+              "en": "Position"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelDecimals": 0
+          }
+        ]
+      },
+      {
+        "id": "enable_quiet_time",
+        "title": {
+          "en": "Enable quiet time"
+        },
+        "hint": {
+          "en": "Enable quiet time to suppress camera notifications."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "disable_quiet_time",
+        "title": {
+          "en": "Disable quiet time"
+        },
+        "hint": {
+          "en": "Disable quiet time to resume camera notifications."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=camera"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_enable_quiet_time",
+        "title": {
+          "en": "Enable quiet time"
+        },
+        "hint": {
+          "en": "Enable quiet time to suppress doorbell notifications."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "doorbell_disable_quiet_time",
+        "title": {
+          "en": "Disable quiet time"
+        },
+        "hint": {
+          "en": "Disable quiet time to resume doorbell notifications."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=doorbell"
+          }
+        ]
+      },
+      {
+        "id": "set_mode",
+        "title": {
+          "en": "Set mode"
+        },
+        "titleFormatted": {
+          "en": "Set mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set this structure's Home/Away mode."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=home-away"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "home",
+                "title": {
+                  "en": "Home"
+                }
+              },
+              {
+                "id": "away",
+                "title": {
+                  "en": "Away"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "start_cleaning",
+        "title": {
+          "en": "Start cleaning"
+        },
+        "hint": {
+          "en": "Start the vacuum cleaning cycle."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "stop_cleaning",
+        "title": {
+          "en": "Stop cleaning"
+        },
+        "hint": {
+          "en": "Stop the vacuum cleaning cycle."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "pause_cleaning",
+        "title": {
+          "en": "Pause cleaning"
+        },
+        "hint": {
+          "en": "Pause the vacuum cleaning cycle."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "return_to_dock",
+        "title": {
+          "en": "Return to dock"
+        },
+        "hint": {
+          "en": "Send the vacuum back to its dock."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=robot"
+          }
+        ]
+      },
+      {
+        "id": "set_eco_mode",
+        "title": {
+          "en": "Set eco mode"
+        },
+        "titleFormatted": {
+          "en": "Set eco mode to [[enabled]]"
+        },
+        "hint": {
+          "en": "Enable or disable eco mode."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          },
+          {
+            "name": "enabled",
+            "type": "dropdown",
+            "title": {
+              "en": "Eco Mode"
+            },
+            "values": [
+              {
+                "id": "true",
+                "title": {
+                  "en": "Enabled"
+                }
+              },
+              {
+                "id": "false",
+                "title": {
+                  "en": "Disabled"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "open_for_duration",
+        "title": {
+          "en": "Open for duration"
+        },
+        "titleFormatted": {
+          "en": "Open valve for [[duration]] minutes"
+        },
+        "hint": {
+          "en": "Open the valve for a specified duration, then automatically close."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=valve"
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "title": {
+              "en": "Duration (minutes)"
+            },
+            "min": 1,
+            "max": 120,
+            "step": 1
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Blinds/Shades"
+      },
+      "class": "windowcoverings",
+      "capabilities": [
+        "windowcoverings_set",
+        "windowcoverings_state"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/blinds/assets/images/small.png",
+        "large": "/drivers/blinds/assets/images/large.png",
+        "xlarge": "/drivers/blinds/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "blinds"
+    },
+    {
+      "name": {
+        "en": "Camera"
+      },
+      "class": "camera",
+      "capabilities": [
+        "onoff",
+        "alarm_motion",
+        "alarm_person_detected",
+        "alarm_animal_detected",
+        "alarm_vehicle_detected"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Camera Active"
+          },
+          "insightsTitleTrue": {
+            "en": "Camera became active"
+          },
+          "insightsTitleFalse": {
+            "en": "Quiet time enabled"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/camera/assets/images/small.png",
+        "large": "/drivers/camera/assets/images/large.png",
+        "xlarge": "/drivers/camera/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "camera"
+    },
+    {
+      "name": {
+        "en": "Diffuser"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "en": "Intensity"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/diffuser/assets/images/small.png",
+        "large": "/drivers/diffuser/assets/images/large.png",
+        "xlarge": "/drivers/diffuser/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "diffuser"
+    },
+    {
+      "name": {
+        "en": "Doorbell"
+      },
+      "class": "doorbell",
+      "capabilities": [
+        "onoff",
+        "alarm_motion",
+        "alarm_person_detected",
+        "alarm_animal_detected",
+        "alarm_vehicle_detected",
+        "alarm_generic"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Doorbell Active"
+          },
+          "insightsTitleTrue": {
+            "en": "Doorbell became active"
+          },
+          "insightsTitleFalse": {
+            "en": "Quiet time enabled"
+          }
+        },
+        "alarm_generic": {
+          "title": {
+            "en": "Button"
+          },
+          "insightsTitleTrue": {
+            "en": "Doorbell pressed"
+          },
+          "insightsTitleFalse": {
+            "en": "Doorbell idle"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/doorbell/assets/images/small.png",
+        "large": "/drivers/doorbell/assets/images/large.png",
+        "xlarge": "/drivers/doorbell/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "doorbell"
+    },
+    {
+      "name": {
+        "en": "Fan"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "en": "Speed"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/fan/assets/images/small.png",
+        "large": "/drivers/fan/assets/images/large.png",
+        "xlarge": "/drivers/fan/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "fan"
+    },
+    {
+      "name": {
+        "en": "Garage Door"
+      },
+      "class": "garagedoor",
+      "capabilities": [
+        "garagedoor_closed",
+        "alarm_generic"
+      ],
+      "capabilitiesOptions": {
+        "alarm_generic": {
+          "title": {
+            "en": "Obstruction"
+          },
+          "insightsTitleTrue": {
+            "en": "Obstruction detected"
+          },
+          "insightsTitleFalse": {
+            "en": "Obstruction cleared"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/garage/assets/images/small.png",
+        "large": "/drivers/garage/assets/images/large.png",
+        "xlarge": "/drivers/garage/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "garage"
+    },
+    {
+      "name": {
+        "en": "Heater / Cooler"
+      },
+      "class": "heater",
+      "capabilities": [
+        "onoff",
+        "measure_temperature",
+        "target_temperature",
+        "thermostat_mode"
+      ],
+      "capabilitiesOptions": {
+        "thermostat_mode": {
+          "title": {
+            "en": "Mode"
+          },
+          "values": [
+            {
+              "id": "heat",
+              "title": {
+                "en": "Heat"
+              }
+            },
+            {
+              "id": "cool",
+              "title": {
+                "en": "Cool"
+              }
+            },
+            {
+              "id": "auto",
+              "title": {
+                "en": "Auto"
+              }
+            }
+          ]
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/heater-cooler/assets/images/small.png",
+        "large": "/drivers/heater-cooler/assets/images/large.png",
+        "xlarge": "/drivers/heater-cooler/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "heater-cooler"
+    },
+    {
+      "name": {
+        "en": "Home/Away"
+      },
+      "class": "other",
+      "capabilities": [
+        "onoff",
+        "home_away_mode"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Home"
+          },
+          "insightsTitleTrue": {
+            "en": "Set to home"
+          },
+          "insightsTitleFalse": {
+            "en": "Set to away"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/home-away/assets/images/small.png",
+        "large": "/drivers/home-away/assets/images/large.png",
+        "xlarge": "/drivers/home-away/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "home-away"
+    },
+    {
+      "name": {
+        "en": "Humidifier / Dehumidifier"
+      },
+      "class": "humidifier",
+      "capabilities": [
+        "onoff",
+        "measure_humidity",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "en": "Intensity"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/humidifier/assets/images/small.png",
+        "large": "/drivers/humidifier/assets/images/large.png",
+        "xlarge": "/drivers/humidifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "humidifier"
+    },
+    {
+      "name": {
+        "en": "Smart Kettle"
+      },
+      "class": "kettle",
+      "capabilities": [
+        "onoff",
+        "measure_temperature",
+        "target_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/kettle/assets/images/small.png",
+        "large": "/drivers/kettle/assets/images/large.png",
+        "xlarge": "/drivers/kettle/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "kettle"
+    },
+    {
+      "name": {
+        "en": "Light"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_hue",
+        "light_saturation",
+        "light_temperature"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/light/assets/images/small.png",
+        "large": "/drivers/light/assets/images/large.png",
+        "xlarge": "/drivers/light/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "light"
+    },
+    {
+      "name": {
+        "en": "Lock"
+      },
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "alarm_generic"
+      ],
+      "capabilitiesOptions": {
+        "alarm_generic": {
+          "title": {
+            "en": "Jammed"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/lock/assets/images/small.png",
+        "large": "/drivers/lock/assets/images/large.png",
+        "xlarge": "/drivers/lock/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "lock"
+    },
+    {
+      "name": {
+        "en": "Outlet"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "measure_power"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/outlet/assets/images/small.png",
+        "large": "/drivers/outlet/assets/images/large.png",
+        "xlarge": "/drivers/outlet/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "outlet"
+    },
+    {
+      "name": {
+        "en": "Air Purifier"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "measure_pm25"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "en": "Fan Speed"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/purifier/assets/images/small.png",
+        "large": "/drivers/purifier/assets/images/large.png",
+        "xlarge": "/drivers/purifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "purifier"
+    },
+    {
+      "name": {
+        "en": "Robot Vacuum"
+      },
+      "class": "vacuumcleaner",
+      "capabilities": [
+        "onoff",
+        "measure_battery",
+        "vacuum_state"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Cleaning"
+          },
+          "insightsTitleTrue": {
+            "en": "Started cleaning"
+          },
+          "insightsTitleFalse": {
+            "en": "Stopped cleaning"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/robot/assets/images/small.png",
+        "large": "/drivers/robot/assets/images/large.png",
+        "xlarge": "/drivers/robot/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "robot"
+    },
+    {
+      "name": {
+        "en": "Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_temperature",
+        "measure_humidity",
+        "alarm_motion"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/sensor/assets/images/small.png",
+        "large": "/drivers/sensor/assets/images/large.png",
+        "xlarge": "/drivers/sensor/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            },
+            {
+              "id": "sensor_type",
+              "type": "label",
+              "label": {
+                "en": "Sensor Type"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "sensor"
+    },
+    {
+      "name": {
+        "en": "Smoke/CO Detector"
+      },
+      "class": "homealarm",
+      "capabilities": [
+        "alarm_smoke",
+        "alarm_co",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/smoke-co-detector/assets/images/small.png",
+        "large": "/drivers/smoke-co-detector/assets/images/large.png",
+        "xlarge": "/drivers/smoke-co-detector/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "smoke-co-detector"
+    },
+    {
+      "name": {
+        "en": "Switch"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/switch/assets/images/small.png",
+        "large": "/drivers/switch/assets/images/large.png",
+        "xlarge": "/drivers/switch/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "switch"
+    },
+    {
+      "name": {
+        "en": "Thermostat"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "target_temperature",
+        "measure_temperature",
+        "thermostat_mode",
+        "measure_humidity",
+        "hvac_state",
+        "thermostat_preset"
+      ],
+      "capabilitiesOptions": {
+        "target_temperature": {
+          "min": 10,
+          "max": 32,
+          "step": 0.5
+        },
+        "thermostat_mode": {
+          "values": [
+            {
+              "id": "off",
+              "title": {
+                "en": "Off"
+              }
+            },
+            {
+              "id": "heat",
+              "title": {
+                "en": "Heat"
+              }
+            },
+            {
+              "id": "cool",
+              "title": {
+                "en": "Cool"
+              }
+            },
+            {
+              "id": "auto",
+              "title": {
+                "en": "Auto"
+              }
+            }
+          ]
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/thermostat/assets/images/small.png",
+        "large": "/drivers/thermostat/assets/images/large.png",
+        "xlarge": "/drivers/thermostat/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Temperature Settings"
+          },
+          "children": [
+            {
+              "id": "temperature_unit",
+              "type": "label",
+              "label": {
+                "en": "Temperature Unit"
+              },
+              "value": "Celsius"
+            }
+          ]
+        }
+      ],
+      "id": "thermostat"
+    },
+    {
+      "name": {
+        "en": "Water Valve"
+      },
+      "class": "other",
+      "capabilities": [
+        "onoff"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Valve Open"
+          },
+          "insightsTitleTrue": {
+            "en": "Valve opened"
+          },
+          "insightsTitleFalse": {
+            "en": "Valve closed"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/valve/assets/images/small.png",
+        "large": "/drivers/valve/assets/images/large.png",
+        "xlarge": "/drivers/valve/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model"
+              },
+              "value": ""
+            },
+            {
+              "id": "room",
+              "type": "label",
+              "label": {
+                "en": "Room"
+              },
+              "value": ""
+            },
+            {
+              "id": "structure",
+              "type": "label",
+              "label": {
+                "en": "Structure"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "id": "valve"
+    }
+  ],
+  "capabilities": {
+    "alarm_animal_detected": {
+      "type": "boolean",
+      "title": {
+        "en": "Animal Detected"
+      },
+      "getable": true,
+      "setable": false,
+      "insightsTitleTrue": {
+        "en": "Animal detected"
+      },
+      "insightsTitleFalse": {
+        "en": "Animal detection cleared"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/animal.svg"
+    },
+    "alarm_person_detected": {
+      "type": "boolean",
+      "title": {
+        "en": "Person Detected"
+      },
+      "getable": true,
+      "setable": false,
+      "insightsTitleTrue": {
+        "en": "Person detected"
+      },
+      "insightsTitleFalse": {
+        "en": "Person detection cleared"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/person.svg"
+    },
+    "alarm_vehicle_detected": {
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Detected"
+      },
+      "getable": true,
+      "setable": false,
+      "insightsTitleTrue": {
+        "en": "Vehicle detected"
+      },
+      "insightsTitleFalse": {
+        "en": "Vehicle detection cleared"
+      },
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/vehicle.svg"
+    },
+    "home_away_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Home/Away Mode"
+      },
+      "desc": {
+        "en": "The current presence mode for the structure"
+      },
+      "values": [
+        {
+          "id": "home",
+          "title": {
+            "en": "Home"
+          }
+        },
+        {
+          "id": "away",
+          "title": {
+            "en": "Away"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/capabilities/home_away_mode.svg"
+    },
+    "hvac_state": {
+      "type": "enum",
+      "title": {
+        "en": "HVAC State"
+      },
+      "desc": {
+        "en": "The current operating state of the HVAC system"
+      },
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "heating",
+          "title": {
+            "en": "Heating"
+          }
+        },
+        {
+          "id": "cooling",
+          "title": {
+            "en": "Cooling"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/hvac_state.svg"
+    },
+    "thermostat_preset": {
+      "type": "enum",
+      "title": {
+        "en": "Thermostat Preset"
+      },
+      "desc": {
+        "en": "The active thermostat preset mode"
+      },
+      "values": [
+        {
+          "id": "none",
+          "title": {
+            "en": "None"
+          }
+        },
+        {
+          "id": "eco",
+          "title": {
+            "en": "Eco"
+          }
+        },
+        {
+          "id": "sleep",
+          "title": {
+            "en": "Sleep"
+          }
+        },
+        {
+          "id": "comfort",
+          "title": {
+            "en": "Comfort"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/capabilities/thermostat_preset.svg"
+    },
+    "vacuum_state": {
+      "type": "enum",
+      "title": {
+        "en": "Vacuum State"
+      },
+      "desc": {
+        "en": "The current operating state of the robot vacuum"
+      },
+      "values": [
+        {
+          "id": "cleaning",
+          "title": {
+            "en": "Cleaning"
+          }
+        },
+        {
+          "id": "docked",
+          "title": {
+            "en": "Docked"
+          }
+        },
+        {
+          "id": "returning",
+          "title": {
+            "en": "Returning to Dock"
+          }
+        },
+        {
+          "id": "paused",
+          "title": {
+            "en": "Paused"
+          }
+        },
+        {
+          "id": "error",
+          "title": {
+            "en": "Error"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/vacuum_state.svg"
+    }
+  },
+  "discovery": {
+    "starling-hub": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "http",
+        "protocol": "tcp"
+      },
+      "id": "{{name}}"
+    }
+  }
+}

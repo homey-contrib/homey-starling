@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "A hub came online"
+  },
+  "titleFormatted": {
+    "en": "[[hub_name]] came online"
+  },
+  "hint": {
+    "en": "Triggers when a Starling Hub reconnects."
+  },
+  "tokens": [
+    {
+      "name": "hub_name",
+      "type": "string",
+      "title": {
+        "en": "Hub Name"
+      },
+      "example": {
+        "en": "Living Room Hub"
+      }
+    }
+  ]
+}

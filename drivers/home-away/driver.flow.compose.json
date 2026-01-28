@@ -1,0 +1,96 @@
+{
+  "triggers": [
+    {
+      "id": "changed_to_home",
+      "title": {
+        "en": "Changed to home"
+      },
+      "hint": {
+        "en": "Triggers when this structure is set to home."
+      }
+    },
+    {
+      "id": "changed_to_away",
+      "title": {
+        "en": "Changed to away"
+      },
+      "hint": {
+        "en": "Triggers when this structure is set to away."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "mode_is",
+      "title": {
+        "en": "Mode is ..."
+      },
+      "titleFormatted": {
+        "en": "Mode !{{is|isn't}} [[mode]]"
+      },
+      "hint": {
+        "en": "Check if this structure's Home/Away mode matches."
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "title": {
+            "en": "Mode"
+          },
+          "values": [
+            {
+              "id": "home",
+              "title": {
+                "en": "Home"
+              }
+            },
+            {
+              "id": "away",
+              "title": {
+                "en": "Away"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "set_mode",
+      "title": {
+        "en": "Set mode"
+      },
+      "titleFormatted": {
+        "en": "Set mode to [[mode]]"
+      },
+      "hint": {
+        "en": "Set this structure's Home/Away mode."
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "title": {
+            "en": "Mode"
+          },
+          "values": [
+            {
+              "id": "home",
+              "title": {
+                "en": "Home"
+              }
+            },
+            {
+              "id": "away",
+              "title": {
+                "en": "Away"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

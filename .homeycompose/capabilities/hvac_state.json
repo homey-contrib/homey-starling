@@ -1,0 +1,33 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "HVAC State"
+  },
+  "desc": {
+    "en": "The current operating state of the HVAC system"
+  },
+  "values": [
+    {
+      "id": "off",
+      "title": {
+        "en": "Off"
+      }
+    },
+    {
+      "id": "heating",
+      "title": {
+        "en": "Heating"
+      }
+    },
+    {
+      "id": "cooling",
+      "title": {
+        "en": "Cooling"
+      }
+    }
+  ],
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/hvac_state.svg"
+}

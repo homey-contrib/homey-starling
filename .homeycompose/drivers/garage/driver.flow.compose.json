@@ -1,0 +1,51 @@
+{
+  "triggers": [
+    {
+      "id": "obstruction_detected",
+      "title": {
+        "en": "Obstruction detected"
+      },
+      "hint": {
+        "en": "Triggers when an obstruction is detected in the garage door path."
+      }
+    },
+    {
+      "id": "obstruction_cleared",
+      "title": {
+        "en": "Obstruction cleared"
+      },
+      "hint": {
+        "en": "Triggers when the garage door obstruction is cleared."
+      }
+    },
+    {
+      "id": "door_opened",
+      "title": {
+        "en": "Garage door opened"
+      },
+      "hint": {
+        "en": "Triggers when the garage door is fully opened."
+      }
+    },
+    {
+      "id": "door_closed",
+      "title": {
+        "en": "Garage door closed"
+      },
+      "hint": {
+        "en": "Triggers when the garage door is fully closed."
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "is_obstructed",
+      "title": {
+        "en": "Garage door !{{is|isn't}} obstructed"
+      },
+      "hint": {
+        "en": "Check if an obstruction is currently detected."
+      }
+    }
+  ]
+}

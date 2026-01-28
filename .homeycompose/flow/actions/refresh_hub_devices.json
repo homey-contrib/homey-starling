@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Refresh devices from hub"
+  },
+  "titleFormatted": {
+    "en": "Refresh all devices from [[hub]]"
+  },
+  "hint": {
+    "en": "Immediately refresh the state of all devices from a specific hub."
+  },
+  "args": [
+    {
+      "name": "hub",
+      "type": "autocomplete",
+      "title": {
+        "en": "Hub"
+      },
+      "placeholder": {
+        "en": "Select hub..."
+      }
+    }
+  ]
+}

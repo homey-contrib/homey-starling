@@ -1,0 +1,34 @@
+{
+  "title": {
+    "en": "Home/Away mode !{{is|isn't}} ..."
+  },
+  "titleFormatted": {
+    "en": "Home/Away mode !{{is|isn't}} [[mode]]"
+  },
+  "hint": {
+    "en": "Check if the Nest Home/Away mode is set to a specific value."
+  },
+  "args": [
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": {
+        "en": "Mode"
+      },
+      "values": [
+        {
+          "id": "home",
+          "title": {
+            "en": "Home"
+          }
+        },
+        {
+          "id": "away",
+          "title": {
+            "en": "Away"
+          }
+        }
+      ]
+    }
+  ]
+}
