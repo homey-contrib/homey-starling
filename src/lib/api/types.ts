@@ -65,6 +65,8 @@ export interface ThermostatDevice extends BaseDevice {
   canHeatCool: boolean;
   ecoMode?: boolean;
   presets?: string[];
+  presetsAvailable?: string;
+  presetSelected?: string;
   temperatureSensors?: string[];
   activeTemperatureSensor?: string;
 }

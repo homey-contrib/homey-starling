@@ -132,7 +132,8 @@
       "none": "Aucun",
       "eco": "Éco",
       "sleep": "Nuit",
-      "comfort": "Confort"
+      "comfort": "Confort",
+      "custom": "Personnalisé"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Appareil plus disponible sur le hub.",
     "read_only_property": "Cette propriété ne peut pas être modifiée.",
     "invalid_value": "Valeur non acceptée par l'appareil.",
+    "invalid_home_away_mode": "Mode Présence/Absence invalide : {{mode}}",
+    "thermostat_preset_not_supported": "Les préréglages du thermostat ne sont pas pris en charge par cet appareil.",
+    "thermostat_preset_custom_not_settable": "Les préréglages personnalisés doivent être sélectionnés dans Google Home.",
+    "thermostat_preset_clear_requires_temp": "Pour effacer un préréglage, ajustez la température cible.",
     "set_error": "Google Home a rejeté la modification.",
     "no_snapshot": "Capture de caméra indisponible.",
     "stream_refused": "Impossible de démarrer le flux vidéo.",

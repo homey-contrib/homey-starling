@@ -130,7 +130,7 @@ abstract class StarlingDriver extends Homey.Driver {
       try {
         const hubManager = this.getHubManager();
         const statuses = hubManager.getAllHubStatuses();
-        this.log('[Pairing] Hub statuses:', JSON.stringify(statuses));
+        this.log(`[Pairing] Found ${statuses.length} hub(s)`);
         const hubs = statuses.map((status: HubStatus) => ({
           id: status.config.id,
           name: status.config.name,
@@ -138,7 +138,6 @@ abstract class StarlingDriver extends Homey.Driver {
           isOnline: status.isOnline,
           deviceCount: status.deviceCount,
         }));
-        this.log('[Pairing] Returning hubs:', JSON.stringify(hubs));
         return hubs;
       } catch (error) {
         this.error('[Pairing] getHubs error:', error);

@@ -37,9 +37,11 @@ interface DeviceStore {
  */
 interface PendingUpdate {
   capability: string;
-  expectedValue: unknown;
+  expectedPropertyValue: unknown;
+  expectedCapabilityValue: unknown;
   previousValue: unknown;
   timestamp: number;
+  timeoutId?: NodeJS.Timeout;
 }
 
 /**
@@ -121,6 +123,8 @@ abstract class StarlingDevice extends Homey.Device {
     this.hubManager.removeListener('hubOffline', this.boundOnHubOffline);
     this.hubManager.removeListener('hubOnline', this.boundOnHubOnline);
 
+    this.clearPendingUpdates();
+
     this.log(`${this.getName()} deleted`);
   }
 
@@ -191,15 +195,13 @@ abstract class StarlingDevice extends Homey.Device {
       const pending = this.pendingUpdates.get(propChange.property);
       if (pending) {
         // Compare with expected value
-        if (propChange.newValue === pending.expectedValue) {
+        if (propChange.newValue === pending.expectedPropertyValue) {
           // Update confirmed, clear pending
+          if (pending.timeoutId) {
+            clearTimeout(pending.timeoutId);
+          }
           this.pendingUpdates.delete(propChange.property);
           this.log(`Update confirmed for ${propChange.property}`);
-        } else if (Date.now() - pending.timestamp > this.UPDATE_TIMEOUT_MS) {
-          // Timeout - rollback to actual value
-          await this.rollbackCapability(pending.capability, propChange.newValue);
-          this.pendingUpdates.delete(propChange.property);
-          this.log(`Rolling back ${propChange.property} to ${String(propChange.newValue)}`);
         }
       }
     }
@@ -244,15 +246,31 @@ abstract class StarlingDevice extends Homey.Device {
       throw new Error(this.homey.__('errors.hub_not_connected'));
     }
 
+    const existing = this.pendingUpdates.get(property);
+    if (existing?.timeoutId) {
+      clearTimeout(existing.timeoutId);
+    }
+
     const previousValue: unknown = this.getCapabilityValue(capability);
     const targetValue: unknown = expectedValue !== undefined ? expectedValue : value;
+
+    const timeoutId = setTimeout(() => {
+      const pending = this.pendingUpdates.get(property);
+      if (!pending) return;
+
+      this.pendingUpdates.delete(property);
+      this.log(`Update timed out for ${property}, refreshing state`);
+      void this.syncDeviceState();
+    }, this.UPDATE_TIMEOUT_MS);
 
     // Store pending update
     this.pendingUpdates.set(property, {
       capability,
-      expectedValue: targetValue,
+      expectedPropertyValue: value,
+      expectedCapabilityValue: targetValue,
       previousValue,
       timestamp: Date.now(),
+      timeoutId,
     });
 
     // Optimistically update UI
@@ -264,8 +282,12 @@ abstract class StarlingDevice extends Homey.Device {
       this.log(`Set ${property} = ${String(value)}`);
     } catch (error) {
       // Rollback on error
-      await this.rollbackCapability(capability, previousValue);
+      const pending = this.pendingUpdates.get(property);
+      if (pending?.timeoutId) {
+        clearTimeout(pending.timeoutId);
+      }
       this.pendingUpdates.delete(property);
+      await this.rollbackCapability(capability, previousValue);
 
       // Fire the command_failed flow trigger
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -474,6 +496,18 @@ abstract class StarlingDevice extends Homey.Device {
         this.previousState.set(key, value);
       }
     }
+  }
+
+  /**
+   * Clear all pending optimistic updates and timers
+   */
+  private clearPendingUpdates(): void {
+    for (const pending of this.pendingUpdates.values()) {
+      if (pending.timeoutId) {
+        clearTimeout(pending.timeoutId);
+      }
+    }
+    this.pendingUpdates.clear();
   }
 }
 

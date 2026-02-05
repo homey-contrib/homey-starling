@@ -132,7 +132,8 @@
       "none": "Ingen",
       "eco": "Øko",
       "sleep": "Søvn",
-      "comfort": "Komfort"
+      "comfort": "Komfort",
+      "custom": "Brugerdefineret"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Enhed ikke længere tilgængelig på hub.",
     "read_only_property": "Denne egenskab kan ikke ændres.",
     "invalid_value": "Værdi ikke accepteret af enheden.",
+    "invalid_home_away_mode": "Ugyldig Hjemme/Væk-tilstand: {{mode}}",
+    "thermostat_preset_not_supported": "Termostatforudindstillinger understøttes ikke af denne enhed.",
+    "thermostat_preset_custom_not_settable": "Brugerdefinerede forudindstillinger skal vælges i Google Home.",
+    "thermostat_preset_clear_requires_temp": "For at fjerne en forudindstilling skal du justere måltemperaturen.",
     "set_error": "Google Home afviste ændringen.",
     "no_snapshot": "Kamera-snapshot utilgængeligt.",
     "stream_refused": "Kunne ikke starte videostream.",

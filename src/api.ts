@@ -9,6 +9,7 @@ import { HubManager, HubConfig, HubStatus } from './lib/hub';
 import { StarlingClient } from './lib/api';
 import { StatusResponse } from './lib/api/types';
 import { HubDiscovery, DiscoveredHub } from './lib/discovery';
+import { getLogger } from './lib/utils';
 
 /**
  * Homey instance interface for API handlers
@@ -21,6 +22,12 @@ interface HomeyInstance {
   app: {
     getHubManager(): HubManager;
     getHubDiscovery(): HubDiscovery;
+    manifest?: {
+      id: string;
+      version: string;
+      sdk: number;
+      platforms?: string[];
+    };
   };
 }
 
@@ -431,6 +438,8 @@ function exportDiagnostics({ homey }: ApiContext): DiagnosticsExportResponse {
   const hubManager = homey.app.getHubManager();
   const statuses = hubManager.getAllHubStatuses();
   const settings = hubManager.getSettings();
+  const manifest = homey.app.manifest;
+  const platform = manifest?.platforms?.[0] ?? 'local';
 
   // Build device category counts
   const devicesByCategory: Record<string, number> = {};
@@ -485,10 +494,10 @@ function exportDiagnostics({ homey }: ApiContext): DiagnosticsExportResponse {
   return {
     exportedAt: new Date().toISOString(),
     app: {
-      id: 'com.andrewrmitchell.apps.startlinghomehub',
-      version: '1.0.0',
-      sdk: 3,
-      platform: 'local',
+      id: manifest?.id ?? 'com.eyecatch.googlenest.starling',
+      version: manifest?.version ?? '2.0.0',
+      sdk: manifest?.sdk ?? 3,
+      platform,
     },
     settings: {
       debugMode: settings.debugMode,
@@ -514,12 +523,13 @@ function exportDiagnostics({ homey }: ApiContext): DiagnosticsExportResponse {
  * POST /discovery/scan - Start a discovery scan for Starling Hubs
  */
 async function startDiscoveryScan({ homey }: ApiContext): Promise<DiscoveryScanResponse> {
-  console.log('[Discovery API] Starting scan...');
+  const logger = getLogger();
+  logger.debug('[Discovery API] Starting scan...');
   const hubDiscovery = homey.app.getHubDiscovery();
 
   // Start scan (this will run for ~5 seconds)
   const hubs = await hubDiscovery.startScan();
-  console.log('[Discovery API] Scan complete, found', hubs.length, 'hubs');
+  logger.debug(`[Discovery API] Scan complete, found ${hubs.length} hubs`);
 
   return {
     hubs,

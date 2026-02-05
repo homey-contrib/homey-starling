@@ -30,6 +30,16 @@ class HomeAwayDeviceClass extends StarlingDevice {
       const mode = value ? 'home' : 'away';
       await this.setPropertyOptimistic('mode', mode, 'onoff', value);
     });
+
+    // Home/Away mode enum
+    if (this.hasCapability('home_away_mode')) {
+      this.registerCapabilityListener('home_away_mode', async (value: string) => {
+        if (value !== 'home' && value !== 'away') {
+          throw new Error(this.homey.__('errors.invalid_home_away_mode', { mode: value }));
+        }
+        await this.setPropertyOptimistic('mode', value, 'home_away_mode', value);
+      });
+    }
   }
 
   /**
@@ -41,6 +51,11 @@ class HomeAwayDeviceClass extends StarlingDevice {
     // Mode to onoff (home = true, away = false)
     if (homeAway.mode !== undefined) {
       await this.safeSetCapabilityValue('onoff', homeAway.mode === 'home');
+    }
+
+    // Mode to enum capability (home/away)
+    if (homeAway.mode !== undefined && this.hasCapability('home_away_mode')) {
+      await this.safeSetCapabilityValue('home_away_mode', homeAway.mode);
     }
   }
 
@@ -58,6 +73,13 @@ class HomeAwayDeviceClass extends StarlingDevice {
         const app = this.homey.app as unknown as StarlingApp;
         app.triggerHomeAwayChanged(homeAway.mode);
         this.log(`Home/Away mode changed: ${String(change.oldValue)} → ${change.newValue}`);
+
+        // Fire device flow triggers
+        if (homeAway.mode === 'home') {
+          void this.triggerFlow('changed_to_home');
+        } else if (homeAway.mode === 'away') {
+          void this.triggerFlow('changed_to_away');
+        }
       }
     }
 

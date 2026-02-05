@@ -23,6 +23,7 @@ import { Device, ThermostatDevice } from '../../lib/api/types';
 
 // Homey thermostat mode values
 type HomeyThermostatMode = 'off' | 'heat' | 'cool' | 'auto';
+type HomeyThermostatPreset = 'none' | 'eco' | 'sleep' | 'comfort' | 'custom';
 
 class ThermostatDeviceClass extends StarlingDevice {
   /**
@@ -37,6 +38,50 @@ class ThermostatDeviceClass extends StarlingDevice {
    */
   private starlingModeToHomey(mode: string): HomeyThermostatMode {
     return mode === 'heatCool' ? 'auto' : (mode as HomeyThermostatMode);
+  }
+
+  private mapStarlingPresetToHomey(preset?: string): HomeyThermostatPreset {
+    if (!preset) return 'none';
+    const normalized = preset.trim().toLowerCase();
+    if (normalized === '') return 'none';
+    if (normalized === 'eco') return 'eco';
+    if (normalized === 'sleep') return 'sleep';
+    if (normalized === 'comfort') return 'comfort';
+    return 'custom';
+  }
+
+  private mapHomeyPresetToStarling(preset: HomeyThermostatPreset): string | null {
+    switch (preset) {
+      case 'eco':
+        return 'Eco';
+      case 'sleep':
+        return 'Sleep';
+      case 'comfort':
+        return 'Comfort';
+      default:
+        return null;
+    }
+  }
+
+  private parsePresetsAvailable(raw?: string): string[] {
+    if (!raw) return [];
+    return raw
+      .split(',')
+      .map((preset) => preset.trim())
+      .filter((preset) => preset.length > 0);
+  }
+
+  private supportsPresets(device?: ThermostatDevice): boolean {
+    return (
+      device?.presetsAvailable !== undefined ||
+      device?.presetSelected !== undefined
+    );
+  }
+
+  private isPresetAvailable(available: string[], preset: string): boolean {
+    if (available.length === 0) return true;
+    const normalized = preset.trim().toLowerCase();
+    return available.some((item) => item.trim().toLowerCase() === normalized);
   }
 
   /**
@@ -60,6 +105,40 @@ class ThermostatDeviceClass extends StarlingDevice {
     if (this.hasCapability('thermostat_eco_mode')) {
       this.registerCapabilityListener('thermostat_eco_mode', async (value: boolean) => {
         await this.setPropertyOptimistic('ecoMode', value, 'thermostat_eco_mode');
+      });
+    }
+
+    // Thermostat preset selection (if supported)
+    if (this.hasCapability('thermostat_preset')) {
+      this.registerCapabilityListener('thermostat_preset', async (value: HomeyThermostatPreset) => {
+        const device = this.getStarlingDevice() as ThermostatDevice | undefined;
+        if (!this.supportsPresets(device)) {
+          throw new Error(this.homey.__('errors.thermostat_preset_not_supported'));
+        }
+
+        if (value === 'custom') {
+          throw new Error(this.homey.__('errors.thermostat_preset_custom_not_settable'));
+        }
+
+        if (value === 'none') {
+          const currentPreset = device?.presetSelected?.trim() ?? '';
+          if (!currentPreset) {
+            return;
+          }
+          throw new Error(this.homey.__('errors.thermostat_preset_clear_requires_temp'));
+        }
+
+        const presetName = this.mapHomeyPresetToStarling(value);
+        if (!presetName) {
+          throw new Error(this.homey.__('errors.thermostat_preset_not_supported'));
+        }
+
+        const available = this.parsePresetsAvailable(device?.presetsAvailable);
+        if (!this.isPresetAvailable(available, presetName)) {
+          throw new Error(this.homey.__('errors.thermostat_preset_not_supported'));
+        }
+
+        await this.setPropertyOptimistic('presetSelected', presetName, 'thermostat_preset', value);
       });
     }
   }
@@ -122,6 +201,11 @@ class ThermostatDeviceClass extends StarlingDevice {
       await this.safeSetCapabilityValue('thermostat_mode', homeyMode);
     }
 
+    // HVAC state (custom capability)
+    if (thermostat.hvacState !== undefined && this.hasCapability('hvac_state')) {
+      await this.safeSetCapabilityValue('hvac_state', thermostat.hvacState);
+    }
+
     // Humidity (optional)
     if (thermostat.humidityPercent !== undefined && this.hasCapability('measure_humidity')) {
       await this.safeSetCapabilityValue('measure_humidity', thermostat.humidityPercent);
@@ -130,6 +214,12 @@ class ThermostatDeviceClass extends StarlingDevice {
     // Eco mode (optional)
     if (thermostat.ecoMode !== undefined && this.hasCapability('thermostat_eco_mode')) {
       await this.safeSetCapabilityValue('thermostat_eco_mode', thermostat.ecoMode);
+    }
+
+    // Thermostat preset (custom capability)
+    if (this.hasCapability('thermostat_preset')) {
+      const preset = this.mapStarlingPresetToHomey(thermostat.presetSelected);
+      await this.safeSetCapabilityValue('thermostat_preset', preset);
     }
   }
 
@@ -156,6 +246,12 @@ class ThermostatDeviceClass extends StarlingDevice {
       // Add eco mode if supported
       if (device.ecoMode !== undefined) {
         await this.ensureCapability('thermostat_eco_mode');
+      }
+
+      if (this.supportsPresets(device)) {
+        await this.ensureCapability('thermostat_preset');
+      } else {
+        await this.removeCapabilityIfPresent('thermostat_preset');
       }
     }
   }

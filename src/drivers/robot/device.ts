@@ -90,6 +90,11 @@ class RobotDeviceClass extends StarlingDevice {
     if (robot.batteryLevel !== undefined && this.hasCapability('measure_battery')) {
       await this.safeSetCapabilityValue('measure_battery', robot.batteryLevel);
     }
+
+    // Vacuum state
+    if (robot.state !== undefined && this.hasCapability('vacuum_state')) {
+      await this.safeSetCapabilityValue('vacuum_state', robot.state);
+    }
   }
 
   /**

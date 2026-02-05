@@ -10,6 +10,7 @@ import * as http from 'http';
 import * as https from 'https';
 import Homey from 'homey';
 import { StatusResponse } from '../api/types';
+import { getLogger } from '../utils/Logger';
 
 /**
  * Discovered hub information
@@ -54,6 +55,7 @@ export class HubDiscovery {
   private readonly homey: Homey.App['homey'];
   private discoveredHubs: Map<string, DiscoveredHub> = new Map();
   private isScanning = false;
+  private readonly logger = getLogger();
 
   /** Ports to probe for Starling SDC API */
   private static readonly PROBE_PORTS = [
@@ -92,7 +94,7 @@ export class HubDiscovery {
    */
   async startScan(): Promise<DiscoveredHub[]> {
     if (this.isScanning) {
-      console.log('[HubDiscovery] Scan already in progress');
+      this.logger.debug('[HubDiscovery] Scan already in progress');
       return this.getDiscoveredHubs();
     }
 
@@ -101,18 +103,20 @@ export class HubDiscovery {
 
     try {
       // Get the discovery strategy
-      console.log('[HubDiscovery] Getting discovery strategy...');
+      this.logger.debug('[HubDiscovery] Getting discovery strategy...');
       const strategy = this.homey.discovery.getStrategy('starling-hub');
 
       if (!strategy) {
-        console.error('[HubDiscovery] Discovery strategy not found!');
+        this.logger.error('[HubDiscovery] Discovery strategy not found!');
         throw new Error('Discovery strategy not found');
       }
 
       // Get current discovery results
       const results = strategy.getDiscoveryResults();
-      console.log('[HubDiscovery] Current discovery results:', Object.keys(results).length, 'devices');
-      console.log('[HubDiscovery] Results:', JSON.stringify(results, null, 2));
+      this.logger.debug(
+        `[HubDiscovery] Current discovery results: ${Object.keys(results).length} devices`
+      );
+      this.logger.debug(`[HubDiscovery] Results: ${JSON.stringify(results, null, 2)}`);
 
       // Process each result in parallel
       const probePromises = Object.values(results).map((result) =>
@@ -120,23 +124,27 @@ export class HubDiscovery {
       );
 
       await Promise.allSettled(probePromises);
-      console.log('[HubDiscovery] Finished probing existing results, found', this.discoveredHubs.size, 'Starling hubs');
+      this.logger.debug(
+        `[HubDiscovery] Finished probing existing results, found ${this.discoveredHubs.size} Starling hubs`
+      );
 
       // Listen for new discoveries during the scan period
       const discoveryHandler = (result: unknown) => {
-        console.log('[HubDiscovery] New discovery result:', JSON.stringify(result));
+        this.logger.debug(`[HubDiscovery] New discovery result: ${JSON.stringify(result)}`);
         void this.processDiscoveryResult(result as MdnsDiscoveryResult);
       };
 
       strategy.on('result', discoveryHandler);
 
       // Scan for a fixed duration, then stop listening
-      console.log('[HubDiscovery] Waiting 2 seconds for more discoveries...');
+      this.logger.debug('[HubDiscovery] Waiting 2 seconds for more discoveries...');
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       strategy.off('result', discoveryHandler);
 
-      console.log('[HubDiscovery] Scan complete, total hubs found:', this.discoveredHubs.size);
+      this.logger.debug(
+        `[HubDiscovery] Scan complete, total hubs found: ${this.discoveredHubs.size}`
+      );
       return this.getDiscoveredHubs();
     } finally {
       this.isScanning = false;
@@ -150,25 +158,27 @@ export class HubDiscovery {
     const address = result.address;
     const mdnsName = result.name ?? result.host ?? address;
 
-    console.log('[HubDiscovery] Processing:', mdnsName, 'at', address);
+    this.logger.debug(`[HubDiscovery] Processing: ${mdnsName} at ${address}`);
 
     // Skip if we've already processed this address
     const existingByAddress = Array.from(this.discoveredHubs.values()).find(
       (h) => h.host === address
     );
     if (existingByAddress) {
-      console.log('[HubDiscovery] Already processed', address);
+      this.logger.debug(`[HubDiscovery] Already processed ${address}`);
       return;
     }
 
     // Probe both ports to check for Starling SDC API
     for (const { port, useHttps } of HubDiscovery.PROBE_PORTS) {
       try {
-        console.log('[HubDiscovery] Probing', address, 'port', port, useHttps ? '(HTTPS)' : '(HTTP)');
+        this.logger.debug(
+          `[HubDiscovery] Probing ${address} port ${port} ${useHttps ? '(HTTPS)' : '(HTTP)'}`
+        );
         const probeResult = await this.probeForStarlingApi(address, port, useHttps);
 
         if (probeResult.isStarling) {
-          console.log('[HubDiscovery] Found Starling Hub at', address, ':', port);
+          this.logger.debug(`[HubDiscovery] Found Starling Hub at ${address}:${port}`);
           const hub: DiscoveredHub = {
             id: `${address}:${port}`,
             name: mdnsName,
@@ -183,10 +193,10 @@ export class HubDiscovery {
           this.discoveredHubs.set(hub.id, hub);
           return; // Found Starling on this device, no need to probe other port
         } else {
-          console.log('[HubDiscovery] Not a Starling Hub:', address, ':', port);
+          this.logger.debug(`[HubDiscovery] Not a Starling Hub: ${address}:${port}`);
         }
       } catch (err) {
-        console.log('[HubDiscovery] Probe failed:', address, ':', port, err);
+        this.logger.debug(`[HubDiscovery] Probe failed: ${address}:${port} ${String(err)}`);
         // Probe failed, continue to next port
       }
     }

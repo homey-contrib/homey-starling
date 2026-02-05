@@ -132,7 +132,8 @@
       "none": "Keine",
       "eco": "Eco",
       "sleep": "Schlaf",
-      "comfort": "Komfort"
+      "comfort": "Komfort",
+      "custom": "Benutzerdefiniert"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Gerät nicht mehr auf Hub verfügbar.",
     "read_only_property": "Diese Eigenschaft kann nicht geändert werden.",
     "invalid_value": "Wert vom Gerät nicht akzeptiert.",
+    "invalid_home_away_mode": "Ungültiger Zuhause/Abwesend-Modus: {{mode}}",
+    "thermostat_preset_not_supported": "Thermostat-Voreinstellungen werden von diesem Gerät nicht unterstützt.",
+    "thermostat_preset_custom_not_settable": "Benutzerdefinierte Voreinstellungen müssen in Google Home ausgewählt werden.",
+    "thermostat_preset_clear_requires_temp": "Um eine Voreinstellung zu entfernen, passen Sie die Zieltemperatur an.",
     "set_error": "Google Home hat die Änderung abgelehnt.",
     "no_snapshot": "Kamera-Schnappschuss nicht verfügbar.",
     "stream_refused": "Videostream konnte nicht gestartet werden.",

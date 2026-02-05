@@ -132,7 +132,8 @@
       "none": "Ingen",
       "eco": "Eko",
       "sleep": "Sömn",
-      "comfort": "Komfort"
+      "comfort": "Komfort",
+      "custom": "Anpassad"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Enhet inte längre tillgänglig på hubben.",
     "read_only_property": "Denna egenskap kan inte ändras.",
     "invalid_value": "Värde accepteras inte av enheten.",
+    "invalid_home_away_mode": "Ogiltigt Hemma/Borta-läge: {{mode}}",
+    "thermostat_preset_not_supported": "Termostatförval stöds inte av den här enheten.",
+    "thermostat_preset_custom_not_settable": "Anpassade förval måste väljas i Google Home.",
+    "thermostat_preset_clear_requires_temp": "Justera måltemperaturen för att rensa ett förval.",
     "set_error": "Google Home avvisade ändringen.",
     "no_snapshot": "Kamera-ögonblicksbild otillgänglig.",
     "stream_refused": "Kunde inte starta videoströmmen.",

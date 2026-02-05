@@ -132,7 +132,8 @@
       "none": "Geen",
       "eco": "Eco",
       "sleep": "Slaap",
-      "comfort": "Comfort"
+      "comfort": "Comfort",
+      "custom": "Aangepast"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Apparaat niet meer beschikbaar op hub.",
     "read_only_property": "Deze eigenschap kan niet worden gewijzigd.",
     "invalid_value": "Waarde niet geaccepteerd door apparaat.",
+    "invalid_home_away_mode": "Ongeldige Thuis/Weg-modus: {{mode}}",
+    "thermostat_preset_not_supported": "Thermostaatpresets worden niet ondersteund door dit apparaat.",
+    "thermostat_preset_custom_not_settable": "Aangepaste presets moeten in Google Home worden geselecteerd.",
+    "thermostat_preset_clear_requires_temp": "Pas de doeltemperatuur aan om een preset te verwijderen.",
     "set_error": "Google Home heeft de wijziging geweigerd.",
     "no_snapshot": "Camera snapshot niet beschikbaar.",
     "stream_refused": "Kon videostream niet starten.",

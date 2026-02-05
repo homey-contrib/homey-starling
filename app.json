@@ -36,7 +36,7 @@
   },
   "author": {
     "name": "Andrew R. Mitchell",
-    "email": "apps@@andrewrmitchell.com"
+    "email": "apps@andrewrmitchell.com"
   },
   "contributors": {
     "developers": [
@@ -3579,6 +3579,12 @@
           "id": "comfort",
           "title": {
             "en": "Comfort"
+          }
+        },
+        {
+          "id": "custom",
+          "title": {
+            "en": "Custom"
           }
         }
       ],

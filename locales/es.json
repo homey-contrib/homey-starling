@@ -132,7 +132,8 @@
       "none": "Ninguno",
       "eco": "Eco",
       "sleep": "Noche",
-      "comfort": "Confort"
+      "comfort": "Confort",
+      "custom": "Personalizado"
     }
   },
   "flow": {
@@ -225,6 +226,10 @@
     "device_not_found": "Dispositivo ya no disponible en el hub.",
     "read_only_property": "Esta propiedad no se puede cambiar.",
     "invalid_value": "Valor no aceptado por el dispositivo.",
+    "invalid_home_away_mode": "Modo Casa/Fuera no válido: {{mode}}",
+    "thermostat_preset_not_supported": "Este dispositivo no admite preajustes del termostato.",
+    "thermostat_preset_custom_not_settable": "Los preajustes personalizados deben seleccionarse en Google Home.",
+    "thermostat_preset_clear_requires_temp": "Para quitar un preajuste, ajusta la temperatura objetivo.",
     "set_error": "Google Home rechazó el cambio.",
     "no_snapshot": "Captura de cámara no disponible.",
     "stream_refused": "No se pudo iniciar la transmisión de vídeo.",

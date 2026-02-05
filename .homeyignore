@@ -1,2 +1,8 @@
 assets_src/
 .homeybuild/
+node_modules/
+.git/
+.DS_Store
+*.log
+npm-debug.log
+yarn-error.log
